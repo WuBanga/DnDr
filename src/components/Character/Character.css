@@ -1,0 +1,30 @@
+.character {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  background-color: gray;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.character__info {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.character__button {
+  padding: 0 0.5rem;
+}
+
+.character__name {
+  font-size: 0.8rem;
+}
+
+.character__text {
+  font-size: 0.6rem;
+}
