@@ -1,10 +1,13 @@
-import { useState } from 'react';
 import { FormInput } from '../../components/FormInput/FormInput';
 import { FormNumberInput } from '../../components/FormInput/FormNumberInput';
 import { SpellsList } from '../../components/SpellsList/SpellsList';
 import { ConspiraciesList } from '../../components/ConspiraciesList/ConspiraciesList';
-import './CreatePage.css';
+import { Comment } from '../../components/Comment/Comment';
+
+import { useState } from 'react';
 import { useCharacters } from '../../hooks/useCharacters';
+
+import './CreatePage.css';
 
 /*
   /имя_персонажа - Сама игра
@@ -18,6 +21,8 @@ export const CreatePage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    character['preparedSpells'] = [];
+    character['checkedSpells'] = [];
     addCharacter(character);
   };
 
@@ -191,7 +196,7 @@ export const CreatePage = () => {
           setData={setCharacter}
         />
       </section>
-      <textarea placeholder="Комментарий"></textarea>
+      <Comment />
       <button type="submit">Создать</button>
     </form>
   );

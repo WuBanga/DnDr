@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 export const FormInput = (props) => {
   const { name, title, data, setData, defaultValue } = props;
+  const input = data[name] || defaultValue;
   useEffect(() => {
     if (data[name] === undefined) {
       setData((prevState) => ({ ...prevState, [name]: defaultValue }));
@@ -11,7 +12,6 @@ export const FormInput = (props) => {
     const value = e.target.value;
     setData((prevState) => ({ ...prevState, [name]: value }));
   };
-  const input = data[name] || defaultValue;
   return (
     <div>
       <label htmlFor={name}>{title}</label>

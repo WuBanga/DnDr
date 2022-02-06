@@ -3,7 +3,11 @@ import { NewCharacter } from '../../components/NewCharacter/NewCharacter';
 import { useCharacters } from '../../hooks/useCharacters';
 import './Home.css';
 export const Home = () => {
-  const { characters } = useCharacters();
+  const { characters, isLoading } = useCharacters();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="home">

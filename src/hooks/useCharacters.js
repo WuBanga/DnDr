@@ -1,20 +1,26 @@
 import { useEffect, useState } from 'react';
 
-const charactersKey = 'characters';
+export const charactersKey = 'characters';
 
 export const useCharacters = () => {
   const [characters, setCharacters] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const charactersString = localStorage.getItem(charactersKey);
-    if (charactersString) {
-      setCharacters(JSON.parse(charactersString));
-    }
+    setTimeout(() => {
+      const charactersString = localStorage.getItem(charactersKey);
+      if (charactersString) {
+        setCharacters(JSON.parse(charactersString));
+      }
+      setIsLoading(false);
+    }, 2000);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(charactersKey, JSON.stringify(characters));
-  }, [characters]);
+    if (!isLoading) {
+      localStorage.setItem(charactersKey, JSON.stringify(characters));
+    }
+  }, [characters, isLoading]);
 
   const addCharacter = (character) => {
     setCharacters((prevState) => [...prevState, character]);
@@ -29,5 +35,15 @@ export const useCharacters = () => {
     );
   };
 
-  return { characters, addCharacter, updateCharacter };
+  const getCharacter = (name) => {
+    return characters.filter((character) => character.name === name)[0];
+  };
+
+  return {
+    characters,
+    isLoading,
+    addCharacter,
+    updateCharacter,
+    getCharacter,
+  };
 };

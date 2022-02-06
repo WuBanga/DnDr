@@ -1,4 +1,4 @@
-import { List } from '../List/List';
+import { List } from '../OldList/List';
 import { useEffect } from 'react';
 
 export const SpellsList = (props) => {

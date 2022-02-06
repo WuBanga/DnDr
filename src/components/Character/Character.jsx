@@ -1,4 +1,5 @@
 import './Character.css';
+import { Link } from 'react-router-dom';
 
 export const Character = (props) => {
   const { character } = props;
@@ -9,7 +10,9 @@ export const Character = (props) => {
         <p className="character__text">{character.race}</p>
         <p className="character__text">{character.class}</p>
       </div>
-      <button className="character__button">Играть</button>
+      <Link to={`/${character.name}/game`}>
+        <button className="character__button">Играть</button>
+      </Link>
     </div>
   );
 };
