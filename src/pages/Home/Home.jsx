@@ -1,7 +1,7 @@
-import { Character } from '../../components/Character/Character';
-import { NewCharacter } from '../../components/NewCharacter/NewCharacter';
+import { CharacterCard } from '../../components/CharacterCard/CharacterCard';
 import { useCharacters } from '../../hooks/useCharacters';
 import './Home.css';
+
 export const Home = () => {
   const { characters, isLoading } = useCharacters();
 
@@ -12,9 +12,9 @@ export const Home = () => {
   return (
     <div className="home">
       {characters.map((character) => (
-        <Character key={character.name} character={character} />
+        <CharacterCard key={character.id} character={character} />
       ))}
-      <NewCharacter />
+      <CharacterCard />
     </div>
   );
 };
