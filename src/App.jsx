@@ -1,8 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home } from './pages/Home/Home';
-import { CreatePage } from './pages/Create/CreatePage';
-import { GamePage } from './pages/Game/GamePage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import './App.css';
+import { Create } from './pages/Create/Create';
+import { Game } from './pages/Game/Game';
+import { Home } from './pages/Home/Home';
+import { Update } from './pages/Update/Update';
 
 export const App = () => {
   return (
@@ -10,8 +12,9 @@ export const App = () => {
       <main className="app">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/create" element={<CreatePage />} />
-          <Route path="/:characterName/game" element={<GamePage />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/:characterId/update" element={<Update />} />
+          <Route path="/:characterId/game" element={<Game />} />
         </Routes>
       </main>
     </BrowserRouter>

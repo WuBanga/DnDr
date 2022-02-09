@@ -1,39 +1,86 @@
 export const characterActionTypes = {
   SET: 'set',
-  PREPARE: 'prepare',
-  UNPREPARE: 'unprepare',
   TOGGLE_USED: 'toggleUsed',
   RESET_USED: 'resetUsed',
-  SET_PREPARED: 'setPrepared',
+  TOGGLE_PREPARED: 'togglePrepared',
+  UPDATE_HITS: 'updateHits',
+  UPDATE_EXTRA_HITS: 'updateExtraHits',
+  UPDATE_MONEY: 'updateMoney',
+  UPDATE_EXPERIENCE: 'updateExperience',
+  UPDATE_LEVEL: 'updateLevel',
 };
 
 export const characterReducer = (state, action) => {
   switch (action.type) {
     case characterActionTypes.SET:
       return action.character;
-    case characterActionTypes.SET_PREPARED:
-      return setPrepared(state, action.spellsList);
-    case characterActionTypes.PREPARE:
-      return prepare(state, action.spell);
-    case characterActionTypes.UNPREPARE:
-      return unprepare(state, action.spellIndex);
+    case characterActionTypes.TOGGLE_PREPARED:
+      return togglePrepared(state, action.spellId);
     case characterActionTypes.TOGGLE_USED:
-      return toggleUsed(state, action.spellIndex);
+      return toggleUsed(state, action.spellId);
     case characterActionTypes.RESET_USED:
       return resetUsed(state);
+    case characterActionTypes.UPDATE_HITS:
+      return updateHits(state, action.hits);
+    case characterActionTypes.UPDATE_EXTRA_HITS:
+      return updateExtraHits(state, action.extraHits);
+    case characterActionTypes.UPDATE_MONEY:
+      return updateMoney(state, money);
+    case characterActionTypes.UPDATE_EXPERIENCE:
+      return updateExperience(state, experience);
+    case characterActionTypes.UPDATE_LEVEL:
+      return updateLevel(state, level);
     default:
       throw new Error(`Unknown action type ${action.type}`);
   }
 };
 
-const setPrepared = (character, spellsList) => {
+const updateLevel = (character, level) => {
   return {
     ...character,
-    preparedSpells: spellsList.map((spell) => {
-      return {
-        name: spell,
-        used: false,
-      };
+    level: level,
+  };
+};
+
+const updateExperience = (character, experience) => {
+  return {
+    ...character,
+    experience: experience,
+  };
+};
+
+const updateMoney = (character, money) => {
+  return {
+    ...character,
+    money: money,
+  };
+};
+
+const updateExtraHits = (character, extraHits) => {
+  return {
+    ...character,
+    extraHits: extraHits,
+  };
+};
+
+const updateHits = (character, hits) => {
+  return {
+    ...character,
+    hits: hits,
+  };
+};
+
+const togglePrepared = (character, spellId) => {
+  return {
+    ...character,
+    spells: character.spells.map((spell) => {
+      if (spell.id === spellId) {
+        return {
+          ...spell,
+          prepared: !spell.prepared,
+        };
+      }
+      return spell;
     }),
   };
 };
@@ -41,7 +88,7 @@ const setPrepared = (character, spellsList) => {
 const resetUsed = (character) => {
   return {
     ...character,
-    preparedSpells: character.preparedSpells.map((spell) => {
+    spells: character.spells.map((spell) => {
       return {
         ...spell,
         used: false,
@@ -50,11 +97,11 @@ const resetUsed = (character) => {
   };
 };
 
-const toggleUsed = (character, spellIndex) => {
+const toggleUsed = (character, spellId) => {
   return {
     ...character,
-    preparedSpells: character.preparedSpells.map((spell, index) => {
-      if (index === spellIndex) {
+    spells: character.spells.map((spell) => {
+      if (spell.id === spellId) {
         return {
           ...spell,
           used: !spell.used,
@@ -62,24 +109,5 @@ const toggleUsed = (character, spellIndex) => {
       }
       return spell;
     }),
-  };
-};
-
-const prepare = (character, spell) => {
-  return {
-    ...character,
-    preparedSpells: character.preparedSpells.concat({
-      name: spell,
-      used: false,
-    }),
-  };
-};
-
-const unprepare = (character, spellIndex) => {
-  return {
-    ...character,
-    preparedSpells: character.preparedSpells.filter(
-      (_, index) => index !== spellIndex
-    ),
   };
 };

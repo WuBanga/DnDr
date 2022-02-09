@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { generateId } from '../utils/generateId';
+
 export const charactersKey = 'characters';
 
 export const useCharacters = () => {
@@ -22,21 +24,21 @@ export const useCharacters = () => {
     }
   }, [characters, isLoading]);
 
-  const addCharacter = (character) => {
+  const addCharacter = (id, character) => {
+    character['id'] = id;
     setCharacters((prevState) => [...prevState, character]);
   };
 
-  const updateCharacter = (index, newCharacter) => {
+  const updateCharacter = (id, newCharacter) => {
     setCharacters((prevState) =>
-      prevState
-        .slice(0, index)
-        .concat(newCharacter)
-        .concat(prevState.slice(index + 1))
+      prevState.filter((character) => character.id === id).concat(newCharacter)
     );
   };
 
-  const getCharacter = (name) => {
-    return characters.filter((character) => character.name === name)[0];
+  const getCharacter = (id) => {
+    return JSON.parse(localStorage.getItem(charactersKey)).find(
+      (character) => character.id === id
+    );
   };
 
   return {

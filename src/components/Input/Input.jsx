@@ -1,4 +1,8 @@
 export const Input = (props) => {
   const { ...inputProps } = props;
-  return <input {...inputProps} />;
+  return (
+    <div>
+      <input {...inputProps} />
+    </div>
+  );
 };
