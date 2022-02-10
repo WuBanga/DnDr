@@ -27,9 +27,45 @@ export const CharacterEditor = (props) => {
         type: 'required',
         errorMessage: 'Поле "Имя" является обязательным',
       },
+      // {
+      //   validate: isUniqueName,
+      //   errorMessage: 'Такое имя уже занято',
+      // },
+    ],
+    race: [
       {
-        validate: isUniqueName,
-        errorMessage: 'Такое имя уже занято',
+        type: 'required',
+        errorMessage: 'Поле "Раса" является обязательным',
+      },
+    ],
+    class: [
+      {
+        type: 'required',
+        errorMessage: 'Поле "Класс" является обязательным',
+      },
+    ],
+    wisdom: [
+      {
+        type: 'required',
+        errorMessage: 'Поле "Мудрость" является обязательным',
+      },
+    ],
+    languages: [
+      {
+        type: 'required',
+        errorMessage: 'Поле "Языки" является обязательным',
+      },
+    ],
+    prehistory: [
+      {
+        type: 'required',
+        errorMessage: 'Поле "Предыстория" является обязательным',
+      },
+    ],
+    saveThrows: [
+      {
+        type: 'required',
+        errorMessage: 'Поле "Спасброски" является обязательным',
       },
     ],
   };
@@ -40,12 +76,12 @@ export const CharacterEditor = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const validationResult = validate(character);
-    // if (validationResult !== true) {
-    //   setFormError(validationResult);
-    //   return;
-    // }
-    // setFormError({});
+    const validationResult = validate(character);
+    if (validationResult !== true) {
+      setFormError(validationResult);
+      return;
+    }
+    setFormError({});
 
     const id = character.id === undefined ? generateId() : character.id;
     console.log(id);
@@ -70,6 +106,7 @@ export const CharacterEditor = (props) => {
           defaultValue=""
           data={character}
           setData={setCharacter}
+          formError={formError}
         />
         <FormInput
           name="class"
@@ -77,14 +114,16 @@ export const CharacterEditor = (props) => {
           defaultValue=""
           data={character}
           setData={setCharacter}
+          formError={formError}
         />
         <FormInput
           name="speed"
           type="number"
           label="Скорость"
-          defaultValue={30}
+          defaultValue={0}
           data={character}
           setData={setCharacter}
+          min={0}
         />
         <FormInput
           name="worldview"
@@ -92,6 +131,7 @@ export const CharacterEditor = (props) => {
           defaultValue=""
           data={character}
           setData={setCharacter}
+          formError={formError}
         />
         <FormInput
           name="languages"
@@ -99,6 +139,7 @@ export const CharacterEditor = (props) => {
           defaultValue=""
           data={character}
           setData={setCharacter}
+          formError={formError}
         />
         <FormInput
           name="prehistory"
@@ -106,6 +147,7 @@ export const CharacterEditor = (props) => {
           defaultValue=""
           data={character}
           setData={setCharacter}
+          formError={formError}
         />
       </section>
       <h1>Характеристики</h1>
@@ -117,6 +159,7 @@ export const CharacterEditor = (props) => {
           defaultValue={0}
           data={character}
           setData={setCharacter}
+          min={0}
         />
         <FormInput
           name="wisdom"
@@ -125,6 +168,7 @@ export const CharacterEditor = (props) => {
           defaultValue={0}
           data={character}
           setData={setCharacter}
+          min={0}
         />
         <FormInput
           name="dexterity"
@@ -133,6 +177,7 @@ export const CharacterEditor = (props) => {
           defaultValue={0}
           data={character}
           setData={setCharacter}
+          min={0}
         />
         <FormInput
           name="intelligence"
@@ -141,6 +186,7 @@ export const CharacterEditor = (props) => {
           defaultValue={0}
           data={character}
           setData={setCharacter}
+          min={0}
         />
         <FormInput
           name="charisma"
@@ -149,6 +195,7 @@ export const CharacterEditor = (props) => {
           defaultValue={0}
           data={character}
           setData={setCharacter}
+          min={0}
         />
         <FormInput
           name="constitution"
@@ -157,14 +204,16 @@ export const CharacterEditor = (props) => {
           defaultValue={0}
           data={character}
           setData={setCharacter}
+          min={1}
         />
         <FormInput
           name="hits"
           type="number"
           label="Хиты(Здоровье)"
-          defaultValue={8}
+          defaultValue={1}
           data={character}
           setData={setCharacter}
+          min={1}
         />
         <FormInput
           name="skillBonus"
@@ -183,6 +232,7 @@ export const CharacterEditor = (props) => {
           defaultValue=""
           data={character}
           setData={setCharacter}
+          formError={formError}
         />
         <FormInput
           name="skills"
@@ -211,9 +261,10 @@ export const CharacterEditor = (props) => {
           type="number"
           label="Деньги"
           step={0.01}
-          defaultValue={10}
+          defaultValue={0}
           data={character}
           setData={setCharacter}
+          min={0}
         />
         <FormInput
           name="experience"
@@ -222,6 +273,7 @@ export const CharacterEditor = (props) => {
           defaultValue={0}
           data={character}
           setData={setCharacter}
+          min={0}
         />
         <FormInput
           name="level"
@@ -230,6 +282,7 @@ export const CharacterEditor = (props) => {
           defaultValue={1}
           data={character}
           setData={setCharacter}
+          min={1}
         />
         <FormInput
           name="extraHits"

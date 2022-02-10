@@ -12,6 +12,7 @@ export const FormInput = (props) => {
     setData,
     defaultValue,
     formError,
+    min,
   } = props;
   const input = data[name] || defaultValue;
   const error = formError ? formError[name] : undefined;
@@ -42,6 +43,7 @@ export const FormInput = (props) => {
         value={input}
         step={step}
         onChange={updateInput}
+        min={min}
       />
       {error ? <p>{error}</p> : null}
     </div>
