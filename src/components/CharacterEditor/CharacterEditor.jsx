@@ -1,76 +1,63 @@
 import { useState } from 'react';
 
-import { useCharacters } from '../../hooks/useCharacters';
 import { useFormError } from '../../hooks/useFormError';
 import { generateId } from '../../utils/generateId';
-import { Comment } from '../Comment/Comment';
 import { FormCantripsList } from '../FormCantripsList/FormCantripsList';
 import { FormInput } from '../FormInput/FormInput';
 import { FormSpellsList } from '../FormSpellsList/FormSpellsList';
+import { FormTextArea } from '../FormTextArea/FormTextArea';
+
+const validationRules = {
+  name: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Имя" является обязательным',
+    },
+  ],
+  race: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Раса" является обязательным',
+    },
+  ],
+  class: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Класс" является обязательным',
+    },
+  ],
+  wisdom: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Мудрость" является обязательным',
+    },
+  ],
+  languages: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Языки" является обязательным',
+    },
+  ],
+  prehistory: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Предыстория" является обязательным',
+    },
+  ],
+  saveThrows: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Спасброски" является обязательным',
+    },
+  ],
+};
 
 export const CharacterEditor = (props) => {
   const { initial, onSubmit } = props;
   const [character, setCharacter] = useState(initial ?? {});
-  const { characters } = useCharacters();
-  const [formError, setFormError] = useState({});
+  const [formErrors, setFormErrors] = useState({});
 
-  const isUniqueName = (name) => {
-    if (!characters) {
-      return true;
-    }
-    return !characters.some((character) => character.name === name);
-  };
-
-  const validationRules = {
-    name: [
-      {
-        type: 'required',
-        errorMessage: 'Поле "Имя" является обязательным',
-      },
-      // {
-      //   validate: isUniqueName,
-      //   errorMessage: 'Такое имя уже занято',
-      // },
-    ],
-    race: [
-      {
-        type: 'required',
-        errorMessage: 'Поле "Раса" является обязательным',
-      },
-    ],
-    class: [
-      {
-        type: 'required',
-        errorMessage: 'Поле "Класс" является обязательным',
-      },
-    ],
-    wisdom: [
-      {
-        type: 'required',
-        errorMessage: 'Поле "Мудрость" является обязательным',
-      },
-    ],
-    languages: [
-      {
-        type: 'required',
-        errorMessage: 'Поле "Языки" является обязательным',
-      },
-    ],
-    prehistory: [
-      {
-        type: 'required',
-        errorMessage: 'Поле "Предыстория" является обязательным',
-      },
-    ],
-    saveThrows: [
-      {
-        type: 'required',
-        errorMessage: 'Поле "Спасброски" является обязательным',
-      },
-    ],
-  };
-
-  const { getErrorMessage, validate } = useFormError({
+  const { validate } = useFormError({
     rules: validationRules,
   });
 
@@ -78,175 +65,166 @@ export const CharacterEditor = (props) => {
     e.preventDefault();
     const validationResult = validate(character);
     if (validationResult !== true) {
-      setFormError(validationResult);
+      setFormErrors(validationResult);
       return;
     }
-    setFormError({});
+    setFormErrors({});
 
     const id = character.id === undefined ? generateId() : character.id;
     console.log(id);
     onSubmit(id, character);
   };
 
+  const getProps = (options) => {
+    const {
+      name,
+      label,
+      type = 'text',
+      defaultValue = '',
+      ...otherProps
+    } = options;
+    const props = {
+      name: name,
+      label: label,
+      type: type,
+      value: character[name] ?? defaultValue,
+      onChange: (e) => {
+        let value;
+        if ('target' in e) {
+          if (type === 'number') {
+            value = e.target.valueAsNumber;
+          } else {
+            value = e.target.value;
+          }
+        } else {
+          value = e;
+        }
+        setCharacter((prevState) => ({ ...prevState, [name]: value }));
+      },
+      error: formErrors[name],
+      ...otherProps,
+    };
+
+    return props;
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <h1>Базовая информация</h1>
       <section>
+        <FormInput {...getProps({ name: 'name', label: 'Имя' })} />
+        <FormInput {...getProps({ name: 'race', label: 'Раса' })} />
+        <FormInput {...getProps({ name: 'class', label: 'Класс' })} />
         <FormInput
-          name="name"
-          label="Имя"
-          defaultValue=""
-          data={character}
-          setData={setCharacter}
-          formError={formError}
+          {...getProps({
+            name: 'speed',
+            label: 'Скорость',
+            defaultValue: 30,
+            type: 'number',
+            min: 0,
+          })}
         />
         <FormInput
-          name="race"
-          label="Раса"
-          defaultValue=""
-          data={character}
-          setData={setCharacter}
-          formError={formError}
+          {...getProps({ name: 'worldview', label: 'Мировоззрение' })}
         />
+        <FormInput {...getProps({ name: 'languages', label: 'Языки' })} />
         <FormInput
-          name="class"
-          label="Класс"
-          defaultValue=""
-          data={character}
-          setData={setCharacter}
-          formError={formError}
-        />
-        <FormInput
-          name="speed"
-          type="number"
-          label="Скорость"
-          defaultValue={0}
-          data={character}
-          setData={setCharacter}
-          min={0}
-        />
-        <FormInput
-          name="worldview"
-          label="Мировоззрение"
-          defaultValue=""
-          data={character}
-          setData={setCharacter}
-          formError={formError}
-        />
-        <FormInput
-          name="languages"
-          label="Языки"
-          defaultValue=""
-          data={character}
-          setData={setCharacter}
-          formError={formError}
-        />
-        <FormInput
-          name="prehistory"
-          label="Предыстория"
-          defaultValue=""
-          data={character}
-          setData={setCharacter}
-          formError={formError}
+          {...getProps({ name: 'prehistory', label: 'Предыстория' })}
         />
       </section>
       <h1>Характеристики</h1>
       <section>
         <FormInput
-          name="strength"
-          type="number"
-          label="Сила"
-          defaultValue={0}
-          data={character}
-          setData={setCharacter}
-          min={0}
+          {...getProps({
+            name: 'strength',
+            label: 'Сила',
+            defaultValue: 0,
+            type: 'number',
+            min: 0,
+          })}
         />
         <FormInput
-          name="wisdom"
-          type="number"
-          label="Мудрость"
-          defaultValue={0}
-          data={character}
-          setData={setCharacter}
-          min={0}
+          {...getProps({
+            name: 'wisdom',
+            label: 'Мудрость',
+            defaultValue: 0,
+            type: 'number',
+            min: 0,
+          })}
         />
         <FormInput
-          name="dexterity"
-          type="number"
-          label="Ловкость"
-          defaultValue={0}
-          data={character}
-          setData={setCharacter}
-          min={0}
+          {...getProps({
+            name: 'dexterity',
+            label: 'Ловкость',
+            defaultValue: 0,
+            type: 'number',
+            min: 0,
+          })}
         />
         <FormInput
-          name="intelligence"
-          type="number"
-          label="Интеллект"
-          defaultValue={0}
-          data={character}
-          setData={setCharacter}
-          min={0}
+          {...getProps({
+            name: 'intelligence',
+            label: 'Интеллект',
+            defaultValue: 0,
+            type: 'number',
+            min: 0,
+          })}
         />
         <FormInput
-          name="charisma"
-          type="number"
-          label="Харизма"
-          defaultValue={0}
-          data={character}
-          setData={setCharacter}
-          min={0}
+          {...getProps({
+            name: 'charisma',
+            label: 'Харизма',
+            defaultValue: 0,
+            type: 'number',
+            min: 0,
+          })}
         />
         <FormInput
-          name="constitution"
-          type="number"
-          label="Телосложение"
-          defaultValue={0}
-          data={character}
-          setData={setCharacter}
-          min={1}
+          {...getProps({
+            name: 'constitution',
+            label: 'Телосложение',
+            defaultValue: 1,
+            type: 'number',
+            min: 1,
+          })}
         />
         <FormInput
-          name="hits"
-          type="number"
-          label="Хиты(Здоровье)"
-          defaultValue={1}
-          data={character}
-          setData={setCharacter}
-          min={1}
+          {...getProps({
+            name: 'hits',
+            label: 'Хиты(Здоровье)',
+            defaultValue: 8,
+            type: 'number',
+            min: 1,
+          })}
         />
         <FormInput
-          name="skillBonus"
-          type="number"
-          label="Бонус мастерства"
-          defaultValue={0}
-          data={character}
-          setData={setCharacter}
+          {...getProps({
+            name: 'skillBonus',
+            label: 'Бонус мастерства',
+            defaultValue: 0,
+            type: 'number',
+          })}
         />
       </section>
       <h1>Классовые характеристики</h1>
       <section>
         <FormInput
-          name="savingThrows"
-          label="Спасброски"
-          defaultValue=""
-          data={character}
-          setData={setCharacter}
-          formError={formError}
+          {...getProps({
+            name: 'savingThrows',
+            label: 'Спасброски',
+          })}
         />
         <FormInput
-          name="skills"
-          label="Навыки"
-          defaultValue=""
-          data={character}
-          setData={setCharacter}
+          {...getProps({
+            name: 'skills',
+            label: 'Навыки',
+          })}
         />
         <FormInput
-          name="equipment"
-          label="Снаряжение"
-          defaultValue=""
-          data={character}
-          setData={setCharacter}
+          {...getProps({
+            name: 'equipment',
+            label: 'Снаряжение',
+          })}
         />
         <FormSpellsList spells={character.spells} setCharacter={setCharacter} />
         <FormCantripsList
@@ -257,43 +235,43 @@ export const CharacterEditor = (props) => {
       <h1>Другое</h1>
       <section>
         <FormInput
-          name="money"
-          type="number"
-          label="Деньги"
-          step={0.01}
-          defaultValue={0}
-          data={character}
-          setData={setCharacter}
-          min={0}
+          {...getProps({
+            name: 'money',
+            label: 'Деньги',
+            defaultValue: 10,
+            type: 'number',
+            min: 0,
+            step: 0.01,
+          })}
         />
         <FormInput
-          name="experience"
-          type="number"
-          label="Опыт"
-          defaultValue={0}
-          data={character}
-          setData={setCharacter}
-          min={0}
+          {...getProps({
+            name: 'experience',
+            label: 'Опыт',
+            defaultValue: 0,
+            type: 'number',
+            min: 0,
+          })}
         />
         <FormInput
-          name="level"
-          type="number"
-          label="Уровень"
-          defaultValue={1}
-          data={character}
-          setData={setCharacter}
-          min={1}
+          {...getProps({
+            name: 'level',
+            label: 'Уровень',
+            defaultValue: 1,
+            type: 'number',
+            min: 1,
+          })}
         />
         <FormInput
-          name="extraHits"
-          type="number"
-          label="Доп.хиты"
-          defaultValue={0}
-          data={character}
-          setData={setCharacter}
+          {...getProps({
+            name: 'extraHits',
+            label: 'Доп.хиты',
+            defaultValue: 0,
+            type: 'number',
+          })}
         />
       </section>
-      <Comment />
+      <FormTextArea {...getProps({ name: 'comment', label: 'Комментарий' })} />
       <button type="submit">Сохранить</button>
     </form>
   );

@@ -1,51 +1,15 @@
-import { useEffect } from 'react';
-
+import { FormError } from '../FormError/FormError';
+import { FormLabel } from '../FormLabel/FormLabel';
 import { Input } from '../Input/Input';
 
 export const FormInput = (props) => {
-  const {
-    label,
-    name,
-    type = 'text',
-    step,
-    data,
-    setData,
-    defaultValue,
-    formError,
-    min,
-  } = props;
-  const input = data[name] || defaultValue;
-  const error = formError ? formError[name] : undefined;
-
-  useEffect(() => {
-    if (data[name] === undefined) {
-      setData((prevState) => ({ ...prevState, [name]: defaultValue }));
-    }
-  }, []);
-
-  const updateInput = (e) => {
-    let value;
-    if (type === 'number') {
-      value = e.target.valueAsNumber;
-    } else {
-      value = e.target.value;
-    }
-
-    setData((prevState) => ({ ...prevState, [name]: value }));
-  };
+  const { name, label, error, ...inputProps } = props;
 
   return (
     <div>
-      <label htmlFor="">{label}</label>
-      <Input
-        type={type}
-        name={name}
-        value={input}
-        step={step}
-        onChange={updateInput}
-        min={min}
-      />
-      {error ? <p>{error}</p> : null}
+      <FormLabel htmlFor={name}>{label}</FormLabel>
+      <Input name={name} {...inputProps} />
+      {error ? <FormError>{error}</FormError> : null}
     </div>
   );
 };
