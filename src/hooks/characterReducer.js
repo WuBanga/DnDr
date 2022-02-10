@@ -8,6 +8,7 @@ export const characterActionTypes = {
   UPDATE_MONEY: 'updateMoney',
   UPDATE_EXPERIENCE: 'updateExperience',
   UPDATE_LEVEL: 'updateLevel',
+  UPDATE_COMMENT: 'updateComment',
 };
 
 export const characterReducer = (state, action) => {
@@ -25,14 +26,23 @@ export const characterReducer = (state, action) => {
     case characterActionTypes.UPDATE_EXTRA_HITS:
       return updateExtraHits(state, action.extraHits);
     case characterActionTypes.UPDATE_MONEY:
-      return updateMoney(state, money);
+      return updateMoney(state, action.money);
     case characterActionTypes.UPDATE_EXPERIENCE:
-      return updateExperience(state, experience);
+      return updateExperience(state, action.experience);
     case characterActionTypes.UPDATE_LEVEL:
-      return updateLevel(state, level);
+      return updateLevel(state, action.level);
+    case characterActionTypes.UPDATE_COMMENT:
+      return updateComment(state, action.comment);
     default:
       throw new Error(`Unknown action type ${action.type}`);
   }
+};
+
+const updateComment = (character, comment) => {
+  return {
+    ...character,
+    comment: comment,
+  };
 };
 
 const updateLevel = (character, level) => {

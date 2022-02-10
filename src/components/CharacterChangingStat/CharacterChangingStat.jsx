@@ -1,16 +1,17 @@
 import { Input } from '../Input/Input';
 
 export const CharacterChangingStat = (props) => {
-  const { title, name, step, value, onChange } = props;
+  const { label, name, step, value, onChange, min } = props;
 
   return (
     <div>
-      <label htmlFor={name}>{title}</label>
+      <label htmlFor={name}>{label}</label>
       <Input
         name={name}
         type="number"
         step={step}
         value={value}
+        min={min}
         onChange={(e) => onChange(e.target.valueAsNumber)}
       />
     </div>

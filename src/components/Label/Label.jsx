@@ -1,3 +1,3 @@
-export const FormLabel = (props) => {
+export const Label = (props) => {
   return <label {...props}></label>;
 };

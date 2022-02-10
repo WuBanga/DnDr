@@ -8,9 +8,11 @@ import { CharacterInfo } from '../../components/CharacterInfo/CharacterInfo';
 import { CharacterStat } from '../../components/CharacterStat/CharacterStat';
 import { GameSpellsList } from '../../components/GameSpellsList/GameSpellsList';
 import { Input } from '../../components/Input/Input';
+import { Label } from '../../components/Label/Label';
 import { List } from '../../components/List/List';
 import { ListItem } from '../../components/List/ListItem';
 import { Modal } from '../../components/Modal/Modal';
+import { TextArea } from '../../components/TextArea/TextArea';
 import { characterActionTypes, useCharacter } from '../../hooks/useCharacter';
 import './Game.css';
 
@@ -22,6 +24,13 @@ export const Game = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
+  const updateComment = (comment) => {
+    dispatch({
+      type: characterActionTypes.UPDATE_COMMENT,
+      comment: comment,
+    });
+  };
 
   const updateHits = (hits) => {
     dispatch({
@@ -154,42 +163,44 @@ export const Game = () => {
               text={character.skillBonus}
             />
             <CharacterChangingStat
-              title="Хиты (Здоровье)"
+              label="Хиты (Здоровье)"
               name="hits"
               value={character.hits}
               onChange={updateHits}
             />
             <CharacterChangingStat
-              title="Доп.хиты"
+              label="Доп.хиты"
               name="extraHits"
               value={character.extraHits}
               onChange={updateExtraHits}
             />
           </section>
           <section>
+            <CharacterChangingStat
+              label="Деньги"
+              name="money"
+              step={0.01}
+              value={character.money}
+              onChange={updateMoney}
+            />
+            <CharacterChangingStat
+              label="Опыт"
+              name="experience"
+              value={character.experience}
+              onChange={updateExperience}
+            />
+            <CharacterChangingStat
+              label="Уровень"
+              name="level"
+              value={character.level}
+              onChange={updateLevel}
+            />
             <div>
-              <label htmlFor="money">Деньги</label>
-              <Input
-                name="money"
-                type="number"
-                value={character.money}
-                onChange={updateMoney}
-              />
-            </div>
-            <div>
-              <label htmlFor="experience">Опыт</label>
-              <Input
-                name="experience"
-                value={character.experience}
-                onChange={updateExperience}
-              />
-            </div>
-            <div>
-              <label htmlFor="level">Уровень</label>
-              <Input
-                name="level"
-                value={character.level}
-                onChange={updateLevel}
+              <Label htmlFor="comment">Комментарий</Label>
+              <TextArea
+                name="comment"
+                value={character.comment}
+                onChange={updateComment}
               />
             </div>
           </section>

@@ -1,15 +1,12 @@
-import { FormLabel } from '../FormLabel/FormLabel';
+import { Label } from '../Label/Label';
+import { TextArea } from '../TextArea/TextArea';
 
 export const FormTextArea = (props) => {
-  const { name, value, onChange, label, defaultValue } = props;
+  const { name, value, onChange, label } = props;
   return (
     <div>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <textarea
-        value={value}
-        onChange={onChange}
-        defaultValue={defaultValue}
-      ></textarea>
+      <Label htmlFor={name}>{label}</Label>
+      <TextArea name={name} value={value} onChange={onChange}></TextArea>
     </div>
   );
 };
