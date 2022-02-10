@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { generateId } from '../utils/generateId';
-
 export const charactersKey = 'characters';
 
 export const useCharacters = () => {
@@ -31,7 +29,7 @@ export const useCharacters = () => {
 
   const updateCharacter = (id, newCharacter) => {
     setCharacters((prevState) =>
-      prevState.filter((character) => character.id === id).concat(newCharacter)
+      prevState.filter((character) => character.id !== id).concat(newCharacter)
     );
   };
 

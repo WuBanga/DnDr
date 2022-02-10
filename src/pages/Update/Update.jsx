@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 
+import { CharacterEditor } from '../../components/CharacterEditor/CharacterEditor';
 import { useCharacters } from '../../hooks/useCharacters';
-import { CharacterEditor } from '../CharacterEditor/CharacterEditor';
 
 export const Update = () => {
   const params = useParams();

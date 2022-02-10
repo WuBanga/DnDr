@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-import { Comment } from '../../components/Comment/Comment';
-import { FormCantripsList } from '../../components/FormCantripsList/FormCantripsList';
-import { FormInput } from '../../components/FormInput/FormInput';
-import { FormSpellsList } from '../../components/FormSpellsList/FormSpellsList';
 import { useCharacters } from '../../hooks/useCharacters';
 import { useFormError } from '../../hooks/useFormError';
 import { generateId } from '../../utils/generateId';
+import { Comment } from '../Comment/Comment';
+import { FormCantripsList } from '../FormCantripsList/FormCantripsList';
+import { FormInput } from '../FormInput/FormInput';
+import { FormSpellsList } from '../FormSpellsList/FormSpellsList';
 
 export const CharacterEditor = (props) => {
   const { initial, onSubmit } = props;
@@ -40,14 +40,15 @@ export const CharacterEditor = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validationResult = validate(character);
-    if (validationResult !== true) {
-      setFormError(validationResult);
-      return;
-    }
-    setFormError({});
+    // const validationResult = validate(character);
+    // if (validationResult !== true) {
+    //   setFormError(validationResult);
+    //   return;
+    // }
+    // setFormError({});
 
     const id = character.id === undefined ? generateId() : character.id;
+    console.log(id);
     onSubmit(id, character);
   };
 
@@ -240,7 +241,7 @@ export const CharacterEditor = (props) => {
         />
       </section>
       <Comment />
-      <button type="submit">Создать</button>
+      <button type="submit">Сохранить</button>
     </form>
   );
 };
