@@ -8,7 +8,7 @@ import { Update } from './pages/Update/Update';
 
 export const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/DnDr">
       <main className="app">
         <Routes>
           <Route path="/" element={<Home />} />
