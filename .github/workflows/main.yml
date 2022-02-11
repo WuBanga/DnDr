@@ -16,5 +16,5 @@ jobs:
           node-version: '14'
       - name: Install Packages
         run: npm install
-      - name: Build dict with Vite
+      - name: Build with Vite
         run: npm run build
