@@ -1,24 +1,51 @@
-.character-info {
+.game {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 0.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  gap: 1rem;
 }
 
-.character-info__left-column,
-.character-info__right-column {
-  display: flex;
-  flex-flow: column nowrap;
-  gap: 0.5rem;
+.game__group {
+  border: var(--border-base);
+  padding: 1rem;
+  border-radius: var(--rounded-base);
 }
 
-.stats,
-.other {
+.game__character-name {
+  font-size: 1.5rem;
+}
+
+.game__character-subinfo {
+  font-size: 1.1rem;
+}
+
+.game__character-info,
+.game__character-stats,
+.game__character-other {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 1px solid black;
-  padding: 0.5rem;
+  gap: 0.5rem;
 }
 
-.stat--oneline {
-  grid-column: 1 / 3;
+.game__character-oneline-stat {
+  grid-column: 1/3;
+}
+
+.game__left-column,
+.game__right-column {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+
+.game__comment {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.game__character-spells {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.5rem;
 }

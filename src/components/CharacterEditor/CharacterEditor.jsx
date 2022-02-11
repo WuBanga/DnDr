@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
 import { useFormError } from '../../hooks/useFormError';
-import { generateId } from '../../utils/generateId';
+import { Button } from '../Button/Button';
 import { FormCantripsList } from '../FormCantripsList/FormCantripsList';
 import { FormInput } from '../FormInput/FormInput';
 import { FormSpellsList } from '../FormSpellsList/FormSpellsList';
 import { FormTextArea } from '../FormTextArea/FormTextArea';
+import './CharacterEditor.css';
 
 const validationRules = {
   name: [
@@ -44,7 +45,7 @@ const validationRules = {
       errorMessage: 'Поле "Предыстория" является обязательным',
     },
   ],
-  saveThrows: [
+  savingThrows: [
     {
       type: 'required',
       errorMessage: 'Поле "Спасброски" является обязательным',
@@ -70,9 +71,7 @@ export const CharacterEditor = (props) => {
     }
     setFormErrors({});
 
-    const id = character.id === undefined ? generateId() : character.id;
-    console.log(id);
-    onSubmit(id, character);
+    onSubmit(character);
   };
 
   const getProps = (options) => {
@@ -109,9 +108,9 @@ export const CharacterEditor = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Базовая информация</h1>
-      <section>
+    <form className="character-editor" onSubmit={handleSubmit}>
+      <section className="section">
+        <h1>Базовая информация</h1>
         <FormInput {...getProps({ name: 'name', label: 'Имя' })} />
         <FormInput {...getProps({ name: 'race', label: 'Раса' })} />
         <FormInput {...getProps({ name: 'class', label: 'Класс' })} />
@@ -132,8 +131,8 @@ export const CharacterEditor = (props) => {
           {...getProps({ name: 'prehistory', label: 'Предыстория' })}
         />
       </section>
-      <h1>Характеристики</h1>
-      <section>
+      <section className="section">
+        <h1>Характеристики</h1>
         <FormInput
           {...getProps({
             name: 'strength',
@@ -206,8 +205,8 @@ export const CharacterEditor = (props) => {
           })}
         />
       </section>
-      <h1>Классовые характеристики</h1>
-      <section>
+      <section className="section">
+        <h1>Классовые характеристики</h1>
         <FormInput
           {...getProps({
             name: 'savingThrows',
@@ -232,8 +231,8 @@ export const CharacterEditor = (props) => {
           setCharacter={setCharacter}
         />
       </section>
-      <h1>Другое</h1>
-      <section>
+      <section className="section">
+        <h1>Другое</h1>
         <FormInput
           {...getProps({
             name: 'money',
@@ -270,9 +269,13 @@ export const CharacterEditor = (props) => {
             type: 'number',
           })}
         />
+        <FormTextArea
+          {...getProps({ name: 'comment', label: 'Комментарий' })}
+        />
       </section>
-      <FormTextArea {...getProps({ name: 'comment', label: 'Комментарий' })} />
-      <button type="submit">Сохранить</button>
+      <div className="buttons">
+        <Button type="submit">Сохранить</Button>
+      </div>
     </form>
   );
 };

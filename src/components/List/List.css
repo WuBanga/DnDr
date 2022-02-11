@@ -1,0 +1,17 @@
+.list-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.list-text {
+  grid-column: 2/3;
+}

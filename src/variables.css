@@ -9,4 +9,5 @@
   --text-color: var(--dark-sky-blue);
   --focus-color: var(--chinese-violet);
   --rounded-base: 0.5rem;
+  --border-base: 1px solid var(--text-color);
 }

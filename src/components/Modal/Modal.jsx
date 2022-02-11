@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { Button } from '../Button/Button';
 import './Modal.css';
+
 export const Modal = (props) => {
   // Закрытие на esc
 
@@ -29,9 +30,9 @@ export const Modal = (props) => {
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal__header">
           <h1>{title}</h1>
-          <button type="button" onClick={onClose}>
+          <Button type="button" onClick={onClose}>
             x
-          </button>
+          </Button>
         </div>
         <div className="modal__content">{children}</div>
       </div>

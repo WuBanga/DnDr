@@ -22,14 +22,15 @@ export const useCharacters = () => {
     }
   }, [characters, isLoading]);
 
-  const addCharacter = (id, character) => {
-    character['id'] = id;
+  const addCharacter = (character) => {
     setCharacters((prevState) => [...prevState, character]);
   };
 
-  const updateCharacter = (id, newCharacter) => {
+  const updateCharacter = (newCharacter) => {
     setCharacters((prevState) =>
-      prevState.filter((character) => character.id !== id).concat(newCharacter)
+      prevState
+        .filter((character) => character.id !== newCharacter.id)
+        .concat(newCharacter)
     );
   };
 

@@ -6,6 +6,10 @@ import { useCharacters } from '../../hooks/useCharacters';
 export const Update = () => {
   const params = useParams();
   const { updateCharacter, getCharacter } = useCharacters();
+  const saveCharacter = (character) => {
+    const id = character.id;
+    updateCharacter(character);
+  };
   const character = getCharacter(params.characterId);
-  return <CharacterEditor initial={character} onSubmit={updateCharacter} />;
+  return <CharacterEditor initial={character} onSubmit={saveCharacter} />;
 };

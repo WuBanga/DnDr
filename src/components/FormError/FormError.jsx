@@ -1,3 +1,5 @@
+import './FormError.css';
+
 export const FormError = (props) => {
-  return <p {...props}></p>;
+  return <p className="error" {...props}></p>;
 };

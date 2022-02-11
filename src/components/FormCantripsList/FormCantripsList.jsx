@@ -1,8 +1,9 @@
+import { useState } from 'react';
+
+import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { List } from '../List/List';
 import { ListItem } from '../List/ListItem';
-import { Button } from '../Button/Button';
-import { useState } from 'react';
 
 export const FormCantripsList = (props) => {
   const { cantrips = [], setCharacter } = props;
@@ -26,14 +27,16 @@ export const FormCantripsList = (props) => {
 
   return (
     <div>
-      <label htmlFor="cantrips">Заговоры:</label>
-      <Input
-        type="text"
-        name="cantrips"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        right={<Button onClick={addToList}>+</Button>}
-      />
+      <div className="list-add">
+        <label htmlFor="cantrips">Заговоры:</label>
+        <Input
+          type="text"
+          name="cantrips"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          right={<Button onClick={addToList}>+</Button>}
+        />
+      </div>
       <List>
         {cantrips.map((cantrip, index) => (
           <ListItem

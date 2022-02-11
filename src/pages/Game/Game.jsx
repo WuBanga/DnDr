@@ -95,7 +95,7 @@ export const Game = () => {
   };
 
   return (
-    <div>
+    <div className="game">
       <Modal title="Заклинания" isOpen={isModalOpen} onClose={closeModal}>
         <div>
           <p>Все:</p>
@@ -134,106 +134,106 @@ export const Game = () => {
           </List>
         </div>
       </Modal>
-      <section>
+
+      <div className="game__left-column">
+        <section className="game__character-info game__group">
+          <div className="game__left-column">
+            <h1 className="game__character-name">{character.name}</h1>
+            <h2 className="game__character-subinfo">{character.race}</h2>
+            <h2 className="game__character-subinfo">{character.class}</h2>
+          </div>
+          <div className="game__right-column">
+            <CharacterInfo title="Скорость" text={character.speed} />
+            <CharacterInfo title="Языки" text={character.languages} />
+            <CharacterInfo title="Предыстория" text={character.prehistory} />
+          </div>
+        </section>
+        <section className="game__character-stats game__group">
+          <CharacterStat title="Сила" value={character.strength} />
+          <CharacterStat title="Мудрость" value={character.wisdom} />
+          <CharacterStat title="Ловкость" value={character.dexterity} />
+          <CharacterStat title="Интеллект" value={character.intelligence} />
+          <CharacterStat title="Харизма" value={character.charisma} />
+          <CharacterStat title="Телосложение" value={character.constitution} />
+          <CharacterInfo
+            className="game__character-oneline-stat"
+            title="Бонус мастерства"
+            text={`${character.skillBonus >= 0 ? '+' : '-'}${
+              character.skillBonus
+            }`}
+          />
+          <CharacterChangingStat
+            label="Хиты (Здоровье)"
+            name="hits"
+            value={character.hits}
+            onChange={updateHits}
+          />
+          <CharacterChangingStat
+            label="Доп.хиты"
+            name="extraHits"
+            value={character.extraHits}
+            onChange={updateExtraHits}
+          />
+        </section>
+        <section className="game__character-other game__group">
+          <CharacterChangingStat
+            label="Деньги"
+            name="money"
+            step={0.01}
+            value={character.money}
+            onChange={updateMoney}
+          />
+          <CharacterChangingStat
+            label="Опыт"
+            name="experience"
+            value={character.experience}
+            onChange={updateExperience}
+          />
+          <CharacterChangingStat
+            label="Уровень"
+            name="level"
+            value={character.level}
+            onChange={updateLevel}
+          />
+          <div className="game__comment game__character-oneline-stat">
+            <Label htmlFor="comment">Комментарий</Label>
+            <TextArea
+              name="comment"
+              value={character.comment}
+              onChange={updateComment}
+            />
+          </div>
+        </section>
+      </div>
+      <div className="game__right-column">
+        <section>
+          <CharacterInfo title="Cпасброски" text={character.savingThrows} />
+          <CharacterInfo title="Навыки" text={character.skills} />
+          <CharacterInfo title="Снаряжение" text={character.equipment} />
+        </section>
+        <section>
+          <div className="game__character-spells">
+            <h1>Заклинания</h1>
+            <Button onClick={openModal}>Подготовить</Button>
+            <Button onClick={resetUsedSpells}>Сброс</Button>
+          </div>
+          <GameSpellsList
+            spells={character.spells.filter((spell) => spell.prepared === true)}
+            onChange={toggleUsedSpells}
+          />
+        </section>
+        <section>
+          <h1>Заговоры</h1>
+          <List>
+            {character.cantrips.map((cantrip) => (
+              <ListItem key={cantrip}>{cantrip}</ListItem>
+            ))}
+          </List>
+        </section>
         <Link to={`/${character.id}/update`}>
-          <button>Редактировать</button>
+          <Button>Редактировать</Button>
         </Link>
-        <CharacterInfo title="Имя" text={character.name} />
-        <CharacterInfo title="Раса" text={character.race} />
-        <CharacterInfo title="Класс" text={character.class} />
-        <CharacterInfo title="Скорость" text={character.speed} />
-        <CharacterInfo title="Языки" text={character.languages} />
-        <CharacterInfo title="Предыстория" text={character.prehistory} />
-      </section>
-      <section className="character-info">
-        <div className="character-info__left-column">
-          <section className="character-info">
-            <CharacterStat title="Сила" value={character.strength} />
-            <CharacterStat title="Мудрость" value={character.wisdom} />
-            <CharacterStat title="Ловкость" value={character.dexterity} />
-            <CharacterStat title="Интеллект" value={character.intelligence} />
-            <CharacterStat title="Харизма" value={character.charisma} />
-            <CharacterStat
-              title="Телосложение"
-              value={character.constitution}
-            />
-            <CharacterInfo
-              className="stat stat--oneline"
-              title="Бонус мастерства"
-              text={character.skillBonus}
-            />
-            <CharacterChangingStat
-              label="Хиты (Здоровье)"
-              name="hits"
-              value={character.hits}
-              onChange={updateHits}
-            />
-            <CharacterChangingStat
-              label="Доп.хиты"
-              name="extraHits"
-              value={character.extraHits}
-              onChange={updateExtraHits}
-            />
-          </section>
-          <section>
-            <CharacterChangingStat
-              label="Деньги"
-              name="money"
-              step={0.01}
-              value={character.money}
-              onChange={updateMoney}
-            />
-            <CharacterChangingStat
-              label="Опыт"
-              name="experience"
-              value={character.experience}
-              onChange={updateExperience}
-            />
-            <CharacterChangingStat
-              label="Уровень"
-              name="level"
-              value={character.level}
-              onChange={updateLevel}
-            />
-            <div>
-              <Label htmlFor="comment">Комментарий</Label>
-              <TextArea
-                name="comment"
-                value={character.comment}
-                onChange={updateComment}
-              />
-            </div>
-          </section>
-        </div>
-        <div className="character-info__right-column">
-          <section>
-            <CharacterInfo title="Cпасброски" text={character.savingThrows} />
-            <CharacterInfo title="Навыки" text={character.skills} />
-            <CharacterInfo title="Снаряжение" text={character.equipment} />
-          </section>
-          <section>
-            <div>
-              <h1>Заклинания</h1>
-              <Button onClick={openModal}>Подготовить</Button>
-              <Button onClick={resetUsedSpells}>Сброс</Button>
-            </div>
-            <GameSpellsList
-              spells={character.spells.filter(
-                (spell) => spell.prepared === true
-              )}
-              onChange={toggleUsedSpells}
-            />
-          </section>
-          <section>
-            <h1>Заговоры</h1>
-            <List>
-              {character.cantrips.map((cantrip) => (
-                <ListItem key={cantrip}>{cantrip}</ListItem>
-              ))}
-            </List>
-          </section>
-        </div>
-      </section>
+      </div>
     </div>
   );
 };

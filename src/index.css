@@ -23,3 +23,8 @@ a:visited {
 ul {
   list-style-type: none;
 }
+
+.focusable:focus {
+  outline: none;
+  border: 1px solid var(--focus-color);
+}

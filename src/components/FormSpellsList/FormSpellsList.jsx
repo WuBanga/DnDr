@@ -5,6 +5,7 @@ import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { List } from '../List/List';
 import { ListItem } from '../List/ListItem';
+import './FormSpellsList.css';
 
 export const FormSpellsList = (props) => {
   const { spells = [], setCharacter } = props;
@@ -35,14 +36,16 @@ export const FormSpellsList = (props) => {
 
   return (
     <div>
-      <label htmlFor="spells">Заклинания:</label>
-      <Input
-        type="text"
-        name="spells"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        right={<Button onClick={addToList}>+</Button>}
-      />
+      <div className="list-add">
+        <label htmlFor="spells">Заклинания:</label>
+        <Input
+          type="text"
+          name="spells"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          right={<Button onClick={addToList}>+</Button>}
+        />
+      </div>
       <List>
         {spells.map((spell) => (
           <ListItem

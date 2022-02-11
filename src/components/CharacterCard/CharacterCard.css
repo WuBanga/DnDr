@@ -3,7 +3,7 @@
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--text-color);
+  border: var(--border-base);
   border-radius: var(--rounded-base);
   padding: 1rem;
   gap: 0.5rem;

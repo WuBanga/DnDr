@@ -1,9 +1,11 @@
+import './List.css';
+
 export const ListItem = (props) => {
   const { left, right, children } = props;
   return (
-    <li>
+    <li className="list-item">
       {left}
-      <div>{children}</div>
+      <div className="list-text">{children}</div>
       {right}
     </li>
   );
