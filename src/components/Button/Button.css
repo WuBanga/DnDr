@@ -1,0 +1,9 @@
+.button {
+  display: flex;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  border-radius: var(--rounded-base);
+  padding: 0.5rem 1rem;
+}

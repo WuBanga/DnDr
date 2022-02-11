@@ -1,0 +1,12 @@
+:root {
+  --rich-black: rgba(22, 28, 36, 1);
+  --dark-sky-blue: rgba(148, 184, 197, 1);
+  --gunmetal: rgba(33, 43, 54, 1);
+  --dark-rich-black: rgba(13, 17, 23, 1);
+  --chinese-violet: rgba(129, 110, 148, 1);
+  --primary-color: var(--rich-black);
+  --secondary-color: var(--gunmetal);
+  --text-color: var(--dark-sky-blue);
+  --focus-color: var(--chinese-violet);
+  --rounded-base: 0.5rem;
+}

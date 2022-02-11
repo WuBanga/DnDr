@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
 
+import { Button } from '../Button/Button';
+import './CharacterCard.css';
+
 export const CharacterCard = (props) => {
   const { character } = props;
   if (character === undefined) {
     return (
       <Link to="/create" className="character">
-        <p>+</p>
+        <p className="character__plus">+</p>
       </Link>
     );
   }
@@ -18,10 +21,10 @@ export const CharacterCard = (props) => {
         <p className="character__text">{character.class}</p>
       </div>
       <Link to={`/${character.id}/update`}>
-        <button className="character__button">Редактировать</button>
+        <Button>Редактировать</Button>
       </Link>
       <Link to={`/${character.id}/game`}>
-        <button className="character__button">Играть</button>
+        <Button>Играть</Button>
       </Link>
     </div>
   );
