@@ -1,0 +1,14 @@
+.button {
+  display: flex;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--text-color);
+  border: var(--border-base);
+  border-radius: var(--rounded-base);
+  padding: 0.5rem 1rem;
+}
+
+.button:hover {
+  border-color: var(--focus-color);
+  color: var(--focus-color);
+}

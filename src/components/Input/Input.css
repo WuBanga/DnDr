@@ -1,0 +1,21 @@
+.input-container {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input {
+  display: flex;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  color: var(--text-color);
+  border: var(--border-base);
+  border-radius: var(--rounded-base);
+  outline: none;
+}
+
+.input[type='number']::-webkit-inner-spin-button {
+  appearance: none;
+}

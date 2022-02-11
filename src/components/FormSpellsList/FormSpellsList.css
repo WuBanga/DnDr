@@ -1,0 +1,5 @@
+.list-add {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+}

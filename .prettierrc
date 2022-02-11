@@ -1,1 +1,6 @@
-{ "singleQuote": true }
+{
+  "singleQuote": true,
+  "importOrder": ["^react$", "^[./@]", "^@"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}
