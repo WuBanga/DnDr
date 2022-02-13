@@ -27,7 +27,7 @@ const validationRules = {
       errorMessage: 'Поле "Класс" является обязательным',
     },
   ],
-  wisdom: [
+  worldview: [
     {
       type: 'required',
       errorMessage: 'Поле "Мудрость" является обязательным',
