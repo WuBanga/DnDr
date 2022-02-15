@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
-import { Button } from '../Button/Button';
+import { MinusIcon } from '../../icons/MinusIcon';
+import { PlusIcon } from '../../icons/PlusIcon';
+import { IconButton } from '../IconButton/IconButton';
 import { Input } from '../Input/Input';
 import { List } from '../List/List';
 import { ListItem } from '../List/ListItem';
@@ -34,14 +36,21 @@ export const FormCantripsList = (props) => {
           name="cantrips"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          right={<Button onClick={addToList}>+</Button>}
+          right={
+            <IconButton icon={<PlusIcon />} onClick={addToList}></IconButton>
+          }
         />
       </div>
       <List>
         {cantrips.map((cantrip, index) => (
           <ListItem
             key={cantrip}
-            right={<Button onClick={(e) => deleteFromList(index)}>-</Button>}
+            right={
+              <IconButton
+                icon={<MinusIcon />}
+                onClick={(e) => deleteFromList(index)}
+              ></IconButton>
+            }
           >
             {cantrip}
           </ListItem>

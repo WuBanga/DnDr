@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
+import { MinusIcon } from '../../icons/MinusIcon';
+import { PlusIcon } from '../../icons/PlusIcon';
 import { generateId } from '../../utils/generateId';
-import { Button } from '../Button/Button';
+import { IconButton } from '../IconButton/IconButton';
 import { Input } from '../Input/Input';
 import { List } from '../List/List';
 import { ListItem } from '../List/ListItem';
@@ -43,14 +45,21 @@ export const FormSpellsList = (props) => {
           name="spells"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          right={<Button onClick={addToList}>+</Button>}
+          right={
+            <IconButton icon={<PlusIcon />} onClick={addToList}></IconButton>
+          }
         />
       </div>
       <List>
         {spells.map((spell) => (
           <ListItem
             key={spell.id}
-            right={<Button onClick={(e) => deleteFromList(spell.id)}>-</Button>}
+            right={
+              <IconButton
+                icon={<MinusIcon />}
+                onClick={(e) => deleteFromList(index)}
+              ></IconButton>
+            }
           >
             {spell.name}
           </ListItem>

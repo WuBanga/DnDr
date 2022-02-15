@@ -1,0 +1,19 @@
+.icon-button {
+  padding: 0.5rem;
+  cursor: pointer;
+  border: 1px solid var(--text-color);
+  border-radius: var(--rounded-base);
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-button__icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
+}
