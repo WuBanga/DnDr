@@ -23,6 +23,10 @@ export const useCharacters = () => {
   }, [characters, isLoading]);
 
   const addCharacter = (character) => {
+    localStorage.setItem(
+      charactersKey,
+      JSON.stringify(characters.concat(character))
+    );
     setCharacters((prevState) => [...prevState, character]);
   };
 
