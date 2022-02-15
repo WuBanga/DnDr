@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import './App.css';
+import { GithubLink } from './components/GithubLink/GithubLink';
 import { Create } from './pages/Create/Create';
 import { Game } from './pages/Game/Game';
 import { Home } from './pages/Home/Home';
@@ -17,6 +18,9 @@ export const App = () => {
           <Route path="/:characterId/game" element={<Game />} />
         </Routes>
       </main>
+      <footer className="footer">
+        <GithubLink />
+      </footer>
     </BrowserRouter>
   );
 };
