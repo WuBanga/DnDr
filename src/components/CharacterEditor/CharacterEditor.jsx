@@ -57,6 +57,7 @@ export const CharacterEditor = (props) => {
   const { initial, onSubmit } = props;
   const [character, setCharacter] = useState(initial ?? {});
   const [formErrors, setFormErrors] = useState({});
+  const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false);
 
   const { validate } = useFormError({
     rules: validationRules,
@@ -64,13 +65,13 @@ export const CharacterEditor = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitButtonDisabled(true);
     const validationResult = validate(character);
     if (validationResult !== true) {
       setFormErrors(validationResult);
       return;
     }
     setFormErrors({});
-
     onSubmit(character);
   };
 
@@ -273,8 +274,11 @@ export const CharacterEditor = (props) => {
           {...getProps({ name: 'comment', label: 'Комментарий' })}
         />
       </section>
+
       <div className="buttons">
-        <Button type="submit">Сохранить</Button>
+        <Button type="submit" disabled={isSubmitButtonDisabled}>
+          Сохранить
+        </Button>
       </div>
     </form>
   );

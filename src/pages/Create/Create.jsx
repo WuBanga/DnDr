@@ -11,9 +11,7 @@ export const Create = () => {
     const id = generateId();
     character['id'] = id;
     addCharacter(character);
-    setTimeout(() => {
-      navigate('/');
-    }, 1000);
+    navigate(`/${character.id}/game`);
   };
   return <CharacterEditor onSubmit={saveCharacter} />;
 };
