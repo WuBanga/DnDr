@@ -191,7 +191,7 @@ export const CharacterEditor = (props) => {
         <FormInput
           {...getProps({
             name: 'hits',
-            label: 'Хиты(Здоровье)',
+            label: 'Хиты (Здоровье)',
             defaultValue: 8,
             type: 'number',
             min: 1,
