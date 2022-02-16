@@ -13,3 +13,17 @@
   font-size: 3rem;
   color: var(--text-color);
 }
+
+.character__buttons {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.character__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

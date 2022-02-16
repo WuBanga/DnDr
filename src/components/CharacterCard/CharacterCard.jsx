@@ -4,7 +4,12 @@ import { Button } from '../Button/Button';
 import './CharacterCard.css';
 
 export const CharacterCard = (props) => {
-  const { character } = props;
+  const { character, onOpenModal } = props;
+
+  const openDeleteModal = (character) => {
+    onOpenModal(character);
+  };
+
   if (character === undefined) {
     return (
       <Link to="/create" className="character">
@@ -20,12 +25,23 @@ export const CharacterCard = (props) => {
         <p className="character__text">{character.race}</p>
         <p className="character__text">{character.class}</p>
       </div>
-      <Link to={`/${character.id}/update`}>
-        <Button>Редактировать</Button>
-      </Link>
-      <Link to={`/${character.id}/game`}>
-        <Button>Играть</Button>
-      </Link>
+      <div className="character__buttons">
+        <Link
+          className="button character__button"
+          to={`/${character.id}/update`}
+        >
+          Редактировать
+        </Link>
+        <Link className="button character__button" to={`/${character.id}/game`}>
+          Играть
+        </Link>
+        <Button
+          className="character__button button--attention-button"
+          onClick={(e) => openDeleteModal(character)}
+        >
+          Удалить
+        </Button>
+      </div>
     </div>
   );
 };

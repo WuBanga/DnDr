@@ -12,3 +12,8 @@
   border-color: var(--focus-color);
   color: var(--focus-color);
 }
+
+.button--attention-button {
+  border-color: var(--attention-color);
+  color: var(--attention-color);
+}
