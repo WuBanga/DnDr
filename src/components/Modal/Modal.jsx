@@ -1,4 +1,5 @@
-import { Button } from '../Button/Button';
+import { CloseIcon } from '../../icons/CloseIcon';
+import { IconButton } from '../IconButton/IconButton';
 import './Modal.css';
 
 export const Modal = (props) => {
@@ -30,9 +31,7 @@ export const Modal = (props) => {
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal__header">
           <h1>{title}</h1>
-          <Button type="button" onClick={onClose}>
-            x
-          </Button>
+          <IconButton icon={<CloseIcon />} onClick={onClose} />
         </div>
         <div className="modal__content">{children}</div>
       </div>

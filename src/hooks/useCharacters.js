@@ -23,19 +23,19 @@ export const useCharacters = () => {
   }, [characters, isLoading]);
 
   const addCharacter = (character) => {
-    localStorage.setItem(
-      charactersKey,
-      JSON.stringify(characters.concat(character))
-    );
+    saveCharacters(characters.concat(character));
     setCharacters((prevState) => [...prevState, character]);
   };
 
-  const updateCharacter = (newCharacter) => {
+  const deleteCharacter = (id) => {
+    saveCharacters(characters.filter((character) => character.id !== id));
     setCharacters((prevState) =>
-      prevState
-        .filter((character) => character.id !== newCharacter.id)
-        .concat(newCharacter)
+      prevState.filter((character) => character.id !== id)
     );
+  };
+
+  const saveCharacters = (data) => {
+    localStorage.setItem(charactersKey, JSON.stringify(data));
   };
 
   const getCharacter = (id) => {
@@ -48,7 +48,7 @@ export const useCharacters = () => {
     characters,
     isLoading,
     addCharacter,
-    updateCharacter,
+    deleteCharacter,
     getCharacter,
   };
 };
