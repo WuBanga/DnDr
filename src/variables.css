@@ -5,11 +5,13 @@
   --dark-rich-black: rgba(13, 17, 23, 1);
   --chinese-violet: rgba(129, 110, 148, 1);
   --antique-ruby: rgba(131, 34, 50, 1);
+  --jade: rgba(38, 166, 106, 1);
   --primary-color: var(--rich-black);
   --secondary-color: var(--gunmetal);
   --text-color: var(--dark-sky-blue);
   --focus-color: var(--chinese-violet);
   --rounded-base: 0.5rem;
   --border-base: 1px solid var(--text-color);
-  --attention-color: var(--antique-ruby);
+  --red-color: var(--antique-ruby);
+  --green-color: var(--jade);
 }
