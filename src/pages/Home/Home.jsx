@@ -1,5 +1,5 @@
 import { CharacterCard } from '../../components/CharacterCard/CharacterCard';
-import { NewCharacterCard } from '../../components/NewCharacterCard/NewCharacterCard';
+import { NewCharacterCard } from '../../components/CharacterCard/NewCharacterCard';
 import { useCharacters } from '../../hooks/useCharacters';
 import './Home.css';
 
