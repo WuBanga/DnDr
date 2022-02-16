@@ -11,8 +11,8 @@ export const CharacterCard = (props) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const deleteCharacter = (id) => {
-    onDelete(id);
+  const deleteCharacter = () => {
+    onDelete(character.id);
   };
 
   const closeModal = () => {
@@ -23,14 +23,6 @@ export const CharacterCard = (props) => {
     setIsModalOpen(true);
   };
 
-  if (character === undefined) {
-    return (
-      <Link to="/create" className="character-card">
-        <p className="character-card__plus">+</p>
-      </Link>
-    );
-  }
-
   return (
     <div className="character-card">
       <SubmitModal
@@ -40,7 +32,7 @@ export const CharacterCard = (props) => {
         cancelText="Отмена"
         isOpen={isModalOpen}
         onClose={closeModal}
-        onSubmit={() => deleteCharacter(character.id)}
+        onSubmit={deleteCharacter}
         onCancel={closeModal}
       />
       <div className="character-card__info">

@@ -3,21 +3,3 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
 }
-
-.delete-modal {
-  display: flex;
-  flex-flow: column nowrap;
-  gap: 1rem;
-  padding: 1rem;
-}
-
-.delete-modal__buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-.delete-modal__text {
-  font-size: 1.2rem;
-}

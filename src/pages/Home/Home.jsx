@@ -1,8 +1,5 @@
-import { useState } from 'react';
-
-import { Button } from '../../components/Button/Button';
 import { CharacterCard } from '../../components/CharacterCard/CharacterCard';
-import { Modal } from '../../components/Modal/Modal';
+import { NewCharacterCard } from '../../components/NewCharacterCard/NewCharacterCard';
 import { useCharacters } from '../../hooks/useCharacters';
 import './Home.css';
 
@@ -22,7 +19,7 @@ export const Home = () => {
           onDelete={deleteCharacter}
         />
       ))}
-      <CharacterCard />
+      <NewCharacterCard />
     </div>
   );
 };
