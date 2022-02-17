@@ -1,10 +1,6 @@
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  useNavigate,
-  useSearchParams,
-} from 'react-router-dom';
+import { Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
+
+import { Fragment } from 'react';
 
 import './App.css';
 import { GithubLink } from './components/GithubLink/GithubLink';
@@ -22,7 +18,7 @@ export const App = () => {
     navigate(path);
   }
   return (
-    <BrowserRouter basename="/DnDr">
+    <Fragment>
       <CharactersProvider>
         <main className="app">
           <Routes>
@@ -36,6 +32,6 @@ export const App = () => {
       <footer className="footer">
         <GithubLink />
       </footer>
-    </BrowserRouter>
+    </Fragment>
   );
 };
