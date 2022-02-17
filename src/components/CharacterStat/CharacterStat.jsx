@@ -8,7 +8,7 @@ export const CharacterStat = (props) => {
       <div>
         <p>{value}</p>
         <p>
-          ({bonus >= 0 ? '+' : '-'}
+          ({bonus >= 0 ? '+' : null}
           {bonus})
         </p>
       </div>
@@ -17,5 +17,5 @@ export const CharacterStat = (props) => {
 };
 
 const getBonus = (value) => {
-  return Math.abs(Math.floor((value - 10) / 2));
+  return Math.floor((value - 10) / 2);
 };
