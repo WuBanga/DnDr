@@ -1,4 +1,10 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
 
 import './App.css';
 import { GithubLink } from './components/GithubLink/GithubLink';
@@ -9,6 +15,12 @@ import { Home } from './pages/Home/Home';
 import { Update } from './pages/Update/Update';
 
 export const App = () => {
+  const [searchParams] = useSearchParams();
+  const path = searchParams.get('path');
+  const navigate = useNavigate();
+  if (path) {
+    navigate(path);
+  }
   return (
     <BrowserRouter basename="/DnDr">
       <CharactersProvider>
