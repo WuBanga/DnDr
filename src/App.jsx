@@ -1,6 +1,6 @@
 import { Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
 
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 
 import './App.css';
 import { GithubLink } from './components/GithubLink/GithubLink';
@@ -12,11 +12,14 @@ import { Update } from './pages/Update/Update';
 
 export const App = () => {
   const [searchParams] = useSearchParams();
-  const path = searchParams.get('path');
   const navigate = useNavigate();
-  if (path) {
-    navigate(path);
-  }
+  useEffect(() => {
+    const path = searchParams.get('path');
+    if (path) {
+      navigate(path.replace('/DnDr', ''));
+    }
+  }, []);
+
   return (
     <Fragment>
       <CharactersProvider>
