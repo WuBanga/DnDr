@@ -57,7 +57,7 @@ export const FormSpellsList = (props) => {
             right={
               <IconButton
                 icon={<MinusIcon />}
-                onClick={(e) => deleteFromList(index)}
+                onClick={(e) => deleteFromList(spell.id)}
               ></IconButton>
             }
           >
