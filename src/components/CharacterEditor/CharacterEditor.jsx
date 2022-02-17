@@ -53,9 +53,34 @@ const validationRules = {
   ],
 };
 
+const defaultCharacter = {
+  name: '',
+  race: '',
+  class: '',
+  worldview: '',
+  languages: '',
+  prehistory: '',
+  savingThrows: '',
+  skills: '',
+  equipment: '',
+  spells: [],
+  cantrips: [],
+  strength: 0,
+  wisdom: 0,
+  dexterity: 0,
+  intelligence: 0,
+  charisma: 0,
+  skillBonus: 0,
+  money: 10,
+  experience: 0,
+  speed: 30,
+  constitution: 1,
+  comment: '',
+};
+
 export const CharacterEditor = (props) => {
   const { initial, onSubmit } = props;
-  const [character, setCharacter] = useState(initial ?? {});
+  const [character, setCharacter] = useState(initial ?? defaultCharacter);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false);
 
@@ -76,18 +101,12 @@ export const CharacterEditor = (props) => {
   };
 
   const getProps = (options) => {
-    const {
-      name,
-      label,
-      type = 'text',
-      defaultValue = '',
-      ...otherProps
-    } = options;
+    const { name, label, type = 'text', ...otherProps } = options;
     const props = {
       name: name,
       label: label,
       type: type,
-      value: character[name] ?? defaultValue,
+      value: character[name],
       onChange: (e) => {
         let value;
         if ('target' in e) {
@@ -119,7 +138,6 @@ export const CharacterEditor = (props) => {
           {...getProps({
             name: 'speed',
             label: 'Скорость',
-            defaultValue: 30,
             type: 'number',
             min: 0,
           })}
@@ -138,7 +156,6 @@ export const CharacterEditor = (props) => {
           {...getProps({
             name: 'strength',
             label: 'Сила',
-            defaultValue: 0,
             type: 'number',
             min: 0,
           })}
@@ -147,7 +164,6 @@ export const CharacterEditor = (props) => {
           {...getProps({
             name: 'wisdom',
             label: 'Мудрость',
-            defaultValue: 0,
             type: 'number',
             min: 0,
           })}
@@ -156,7 +172,6 @@ export const CharacterEditor = (props) => {
           {...getProps({
             name: 'dexterity',
             label: 'Ловкость',
-            defaultValue: 0,
             type: 'number',
             min: 0,
           })}
@@ -165,7 +180,6 @@ export const CharacterEditor = (props) => {
           {...getProps({
             name: 'intelligence',
             label: 'Интеллект',
-            defaultValue: 0,
             type: 'number',
             min: 0,
           })}
@@ -174,7 +188,6 @@ export const CharacterEditor = (props) => {
           {...getProps({
             name: 'charisma',
             label: 'Харизма',
-            defaultValue: 0,
             type: 'number',
             min: 0,
           })}
@@ -183,7 +196,6 @@ export const CharacterEditor = (props) => {
           {...getProps({
             name: 'constitution',
             label: 'Телосложение',
-            defaultValue: 1,
             type: 'number',
             min: 1,
           })}
@@ -192,7 +204,6 @@ export const CharacterEditor = (props) => {
           {...getProps({
             name: 'hits',
             label: 'Хиты (Здоровье)',
-            defaultValue: 8,
             type: 'number',
             min: 1,
           })}
@@ -201,7 +212,6 @@ export const CharacterEditor = (props) => {
           {...getProps({
             name: 'skillBonus',
             label: 'Бонус мастерства',
-            defaultValue: 0,
             type: 'number',
           })}
         />
@@ -238,7 +248,6 @@ export const CharacterEditor = (props) => {
           {...getProps({
             name: 'money',
             label: 'Деньги',
-            defaultValue: 10,
             type: 'number',
             min: 0,
             step: 0.01,
@@ -248,7 +257,6 @@ export const CharacterEditor = (props) => {
           {...getProps({
             name: 'experience',
             label: 'Опыт',
-            defaultValue: 0,
             type: 'number',
             min: 0,
           })}
@@ -257,7 +265,6 @@ export const CharacterEditor = (props) => {
           {...getProps({
             name: 'level',
             label: 'Уровень',
-            defaultValue: 1,
             type: 'number',
             min: 1,
           })}
@@ -266,7 +273,6 @@ export const CharacterEditor = (props) => {
           {...getProps({
             name: 'extraHits',
             label: 'Доп.хиты',
-            defaultValue: 0,
             type: 'number',
           })}
         />
