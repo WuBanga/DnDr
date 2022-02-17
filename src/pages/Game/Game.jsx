@@ -7,13 +7,13 @@ import { CharacterChangingStat } from '../../components/CharacterChangingStat/Ch
 import { CharacterInfo } from '../../components/CharacterInfo/CharacterInfo';
 import { CharacterStat } from '../../components/CharacterStat/CharacterStat';
 import { GameSpellsList } from '../../components/GameSpellsList/GameSpellsList';
-import { Input } from '../../components/Input/Input';
 import { Label } from '../../components/Label/Label';
 import { List } from '../../components/List/List';
 import { ListItem } from '../../components/List/ListItem';
 import { Modal } from '../../components/Modal/Modal';
 import { TextArea } from '../../components/TextArea/TextArea';
-import { characterActionTypes, useCharacter } from '../../hooks/useCharacter';
+import { characterActionTypes } from '../../hooks/characterReducer';
+import { useCharacter } from '../../hooks/charactersContext';
 import './Game.css';
 
 export const Game = () => {
