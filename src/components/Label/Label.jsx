@@ -1,3 +1,5 @@
+import './Label.css';
+
 export const Label = (props) => {
-  return <label {...props}></label>;
+  return <label className="label" {...props}></label>;
 };
