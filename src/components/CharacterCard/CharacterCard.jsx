@@ -11,10 +11,6 @@ export const CharacterCard = (props) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const deleteCharacter = () => {
-    onDelete(character.id);
-  };
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -32,7 +28,7 @@ export const CharacterCard = (props) => {
         cancelText="Отмена"
         isOpen={isModalOpen}
         onClose={closeModal}
-        onSubmit={deleteCharacter}
+        onSubmit={onDelete}
         onCancel={closeModal}
       />
       <div className="character-card__info">

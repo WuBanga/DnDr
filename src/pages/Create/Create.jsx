@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { CharacterEditor } from '../../components/CharacterEditor/CharacterEditor';
-import { useCharacters } from '../../hooks/useCharacters';
+import { useCharacters } from '../../hooks/charactersContext';
 import { generateId } from '../../utils/generateId';
 
 export const Create = () => {
