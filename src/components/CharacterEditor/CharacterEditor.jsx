@@ -94,12 +94,12 @@ export const CharacterEditor = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitButtonDisabled(true);
     const validationResult = validate(character);
     if (validationResult !== true) {
       setFormErrors(validationResult);
       return;
     }
+    setIsSubmitButtonDisabled(true);
     setFormErrors({});
     onSubmit(character);
   };
