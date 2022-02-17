@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import { useFormError } from '../../hooks/useFormError';
+import { RequiredIcon } from '../../icons/RequiredIcon';
 import { Button } from '../Button/Button';
 import { FormCantripsList } from '../FormCantripsList/FormCantripsList';
 import { FormInput } from '../FormInput/FormInput';
@@ -70,9 +71,12 @@ const defaultCharacter = {
   dexterity: 0,
   intelligence: 0,
   charisma: 0,
+  hits: 8,
   skillBonus: 0,
   money: 10,
   experience: 0,
+  level: 1,
+  extraHits: 0,
   speed: 30,
   constitution: 1,
   comment: '',
@@ -104,7 +108,14 @@ export const CharacterEditor = (props) => {
     const { name, label, type = 'text', ...otherProps } = options;
     const props = {
       name: name,
-      label: label,
+      label: validationRules[name]?.some((rule) => rule.type === 'required') ? (
+        <Fragment>
+          {label}
+          <RequiredIcon />
+        </Fragment>
+      ) : (
+        label
+      ),
       type: type,
       value: character[name],
       onChange: (e) => {
