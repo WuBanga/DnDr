@@ -1,6 +1,6 @@
 import { CharacterCard } from '../../components/CharacterCard/CharacterCard';
 import { NewCharacterCard } from '../../components/CharacterCard/NewCharacterCard';
-import { useCharacters } from '../../hooks/useCharacters';
+import { useCharacters } from '../../hooks/charactersContext';
 import './Home.css';
 
 export const Home = () => {
@@ -16,7 +16,7 @@ export const Home = () => {
         <CharacterCard
           key={character.id}
           character={character}
-          onDelete={deleteCharacter}
+          onDelete={() => deleteCharacter(character.id)}
         />
       ))}
       <NewCharacterCard />
