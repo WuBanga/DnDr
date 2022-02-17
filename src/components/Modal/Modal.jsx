@@ -1,3 +1,5 @@
+import { createPortal } from 'react-dom';
+
 import { CloseIcon } from '../../icons/CloseIcon';
 import { IconButton } from '../IconButton/IconButton';
 import './Modal.css';
@@ -26,7 +28,7 @@ export const Modal = (props) => {
     return null;
   }
 
-  return (
+  return createPortal(
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal__header">
@@ -35,6 +37,7 @@ export const Modal = (props) => {
         </div>
         <div className="modal__content">{children}</div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
