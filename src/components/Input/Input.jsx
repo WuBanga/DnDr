@@ -6,7 +6,7 @@ export const Input = (props) => {
   return (
     <div className="input-container">
       {left}
-      <input className="input focusable" {...inputProps} />
+      <input className="input focusable" autocomplete="off" {...inputProps} />
       {right}
     </div>
   );
