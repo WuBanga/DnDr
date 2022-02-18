@@ -28,19 +28,17 @@ export const FormCantripsList = (props) => {
   };
 
   return (
-    <div>
-      <div className="list-add">
-        <label htmlFor="cantrips">Заговоры:</label>
-        <Input
-          type="text"
-          name="cantrips"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          right={
-            <IconButton icon={<PlusIcon />} onClick={addToList}></IconButton>
-          }
-        />
-      </div>
+    <div className="list-add">
+      <label htmlFor="cantrips">Заговоры:</label>
+      <Input
+        type="text"
+        name="cantrips"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        right={
+          <IconButton icon={<PlusIcon />} onClick={addToList}></IconButton>
+        }
+      />
       <List>
         {cantrips.map((cantrip, index) => (
           <ListItem

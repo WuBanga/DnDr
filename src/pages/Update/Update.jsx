@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { CharacterEditor } from '../../components/CharacterEditor/CharacterEditor';
+import { HomePageButton } from '../../components/HomePageButton/HomePageButton';
 import { characterActionTypes } from '../../hooks/characterReducer';
 import { useCharacter } from '../../hooks/charactersContext';
 
@@ -17,5 +18,10 @@ export const Update = () => {
     return;
   }
 
-  return <CharacterEditor initial={character} onSubmit={saveCharacter} />;
+  return (
+    <div>
+      <HomePageButton />
+      <CharacterEditor initial={character} onSubmit={saveCharacter} />
+    </div>
+  );
 };
