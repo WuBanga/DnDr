@@ -26,10 +26,10 @@ export const Game = () => {
     return <div>Loading...</div>;
   }
 
-  const updateComment = (comment) => {
+  const updateComment = (e) => {
     dispatch({
       type: characterActionTypes.UPDATE_COMMENT,
-      comment: comment,
+      comment: e.target.value,
     });
   };
 
