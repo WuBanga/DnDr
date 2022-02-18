@@ -8,6 +8,7 @@ import { CharactersProvider } from './hooks/charactersContext';
 import { Create } from './pages/Create/Create';
 import { Game } from './pages/Game/Game';
 import { Home } from './pages/Home/Home';
+import { NotFound } from './pages/NotFound/NotFound';
 import { Update } from './pages/Update/Update';
 
 export const App = () => {
@@ -29,6 +30,7 @@ export const App = () => {
             <Route path="/create" element={<Create />} />
             <Route path="/:characterId/update" element={<Update />} />
             <Route path="/:characterId/game" element={<Game />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </CharactersProvider>

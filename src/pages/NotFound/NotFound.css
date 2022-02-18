@@ -1,0 +1,12 @@
+.not-found {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 1rem;
+}
+
+.not-found__header {
+  font-size: 5rem;
+}
