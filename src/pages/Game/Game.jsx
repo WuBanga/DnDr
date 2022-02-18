@@ -7,6 +7,7 @@ import { CharacterChangingStat } from '../../components/CharacterChangingStat/Ch
 import { CharacterInfo } from '../../components/CharacterInfo/CharacterInfo';
 import { CharacterStat } from '../../components/CharacterStat/CharacterStat';
 import { GameSpellsList } from '../../components/GameSpellsList/GameSpellsList';
+import { HomePageButton } from '../../components/HomePageButton/HomePageButton';
 import { Label } from '../../components/Label/Label';
 import { List } from '../../components/List/List';
 import { ListItem } from '../../components/List/ListItem';
@@ -96,6 +97,7 @@ export const Game = () => {
 
   return (
     <div className="game">
+      <HomePageButton />
       <Modal title="Заклинания" isOpen={isModalOpen} onClose={closeModal}>
         <div>
           <p>Все:</p>
@@ -134,7 +136,6 @@ export const Game = () => {
           </List>
         </div>
       </Modal>
-
       <div className="game__left-column">
         <section className="game__character-info game__group">
           <div className="game__left-column">
