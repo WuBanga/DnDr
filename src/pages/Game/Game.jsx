@@ -23,12 +23,12 @@ export const Game = () => {
   const { character, isLoading, dispatch } = useCharacter(params.characterId);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (character === undefined) {
-    return <NotFound />;
-  }
-
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (character === undefined) {
+    return <NotFound />;
   }
 
   const updateComment = (e) => {

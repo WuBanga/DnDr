@@ -11,12 +11,12 @@ export const Update = () => {
   const navigate = useNavigate();
   const { character, isLoading, dispatch } = useCharacter(params.characterId);
 
-  if (character === undefined) {
-    return <NotFound />;
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
-  if (isLoading) {
-    return;
+  if (character === undefined) {
+    return <NotFound />;
   }
 
   const saveCharacter = (newCharacter) => {
