@@ -15,12 +15,17 @@ import { Modal } from '../../components/Modal/Modal';
 import { TextArea } from '../../components/TextArea/TextArea';
 import { characterActionTypes } from '../../hooks/characterReducer';
 import { useCharacter } from '../../hooks/charactersContext';
+import { NotFound } from '../NotFound/NotFound';
 import './Game.css';
 
 export const Game = () => {
   const params = useParams();
   const { character, isLoading, dispatch } = useCharacter(params.characterId);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (character === undefined) {
+    return <NotFound />;
+  }
 
   if (isLoading) {
     return <div>Loading...</div>;
