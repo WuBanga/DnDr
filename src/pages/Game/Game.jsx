@@ -15,6 +15,7 @@ import { Modal } from '../../components/Modal/Modal';
 import { TextArea } from '../../components/TextArea/TextArea';
 import { characterActionTypes } from '../../hooks/characterReducer';
 import { useCharacter } from '../../hooks/charactersContext';
+import { NotFound } from '../NotFound/NotFound';
 import './Game.css';
 
 export const Game = () => {
@@ -24,6 +25,10 @@ export const Game = () => {
 
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (character === undefined) {
+    return <NotFound />;
   }
 
   const updateComment = (e) => {
