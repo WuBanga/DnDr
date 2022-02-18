@@ -37,19 +37,17 @@ export const FormSpellsList = (props) => {
   };
 
   return (
-    <div>
-      <div className="list-add">
-        <label htmlFor="spells">Заклинания:</label>
-        <Input
-          type="text"
-          name="spells"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          right={
-            <IconButton icon={<PlusIcon />} onClick={addToList}></IconButton>
-          }
-        />
-      </div>
+    <div className="list-add">
+      <label htmlFor="spells">Заклинания:</label>
+      <Input
+        type="text"
+        name="spells"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        right={
+          <IconButton icon={<PlusIcon />} onClick={addToList}></IconButton>
+        }
+      />
       <List>
         {spells.map((spell) => (
           <ListItem

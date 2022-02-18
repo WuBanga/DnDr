@@ -1,7 +1,7 @@
 .list-item {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 0.5rem;
+  gap: 1rem;
   align-items: center;
 }
 
@@ -9,7 +9,6 @@
   display: flex;
   flex-flow: column nowrap;
   gap: 0.5rem;
-  padding: 0.5rem;
 }
 
 .list-text {
