@@ -5,7 +5,11 @@ export const characterActionTypes = {
   TOGGLE_PREPARED: 'togglePrepared',
   UPDATE_HITS: 'updateHits',
   UPDATE_EXTRA_HITS: 'updateExtraHits',
-  UPDATE_MONEY: 'updateMoney',
+  UPDATE_PLATINUM: 'updatePlatinum',
+  UPDATE_GOLD: 'updateGold',
+  UPDATE_ELECTRUM: 'updateElectrum',
+  UPDATE_SILVER: 'updateSilver',
+  UPDATE_COPPER: 'updateCopper',
   UPDATE_EXPERIENCE: 'updateExperience',
   UPDATE_LEVEL: 'updateLevel',
   UPDATE_COMMENT: 'updateComment',
@@ -25,8 +29,16 @@ export const characterReducer = (state, action) => {
       return updateHits(state, action.hits);
     case characterActionTypes.UPDATE_EXTRA_HITS:
       return updateExtraHits(state, action.extraHits);
-    case characterActionTypes.UPDATE_MONEY:
-      return updateMoney(state, action.money);
+    case characterActionTypes.UPDATE_PLATINUM:
+      return updatePlatinum(state, action.platinum);
+    case characterActionTypes.UPDATE_GOLD:
+      return updateGold(state, action.gold);
+    case characterActionTypes.UPDATE_ELECTRUM:
+      return updateElectrum(state, action.electrum);
+    case characterActionTypes.UPDATE_ELECTRUM:
+      return updateSilver(state, action.silver);
+    case characterActionTypes.UPDATE_ELECTRUM:
+      return updateCopper(state, action.copper);
     case characterActionTypes.UPDATE_EXPERIENCE:
       return updateExperience(state, action.experience);
     case characterActionTypes.UPDATE_LEVEL:
@@ -59,10 +71,38 @@ const updateExperience = (character, experience) => {
   };
 };
 
-const updateMoney = (character, money) => {
+const updatePlatinum = (character, platinum) => {
   return {
     ...character,
-    money: money,
+    platinum: platinum,
+  };
+};
+
+const updateGold = (character, gold) => {
+  return {
+    ...character,
+    gold: gold,
+  };
+};
+
+const updateElectrum = (character, electrum) => {
+  return {
+    ...character,
+    electrum: electrum,
+  };
+};
+
+const updateSilver = (character, silver) => {
+  return {
+    ...character,
+    silver: silver,
+  };
+};
+
+const updateCopper = (character, copper) => {
+  return {
+    ...character,
+    copper: copper,
   };
 };
 

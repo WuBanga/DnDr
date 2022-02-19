@@ -52,10 +52,38 @@ export const Game = () => {
     });
   };
 
-  const updateMoney = (money) => {
+  const updatePlatinum = (platinum) => {
     dispatch({
-      type: characterActionTypes.UPDATE_MONEY,
-      money: money,
+      type: characterActionTypes.UPDATE_PLATINUM,
+      platinum: platinum,
+    });
+  };
+
+  const updateGold = (gold) => {
+    dispatch({
+      type: characterActionTypes.UPDATE_GOLD,
+      gold: gold,
+    });
+  };
+
+  const updateElectrum = (electrum) => {
+    dispatch({
+      type: characterActionTypes.UPDATE_ELECTRUM,
+      electrum: electrum,
+    });
+  };
+
+  const updateSilver = (silver) => {
+    dispatch({
+      type: characterActionTypes.UPDATE_SILVER,
+      silver: silver,
+    });
+  };
+
+  const updateCopper = (copper) => {
+    dispatch({
+      type: characterActionTypes.UPDATE_COPPER,
+      copper: copper,
     });
   };
 
@@ -183,11 +211,34 @@ export const Game = () => {
         </section>
         <section className="game__character-other game__group">
           <CharacterChangingStat
-            label="Деньги"
-            name="money"
-            step={0.01}
-            value={character.money}
-            onChange={updateMoney}
+            label="Платина"
+            name="platinum"
+            value={character.platinum}
+            onChange={updatePlatinum}
+          />
+          <CharacterChangingStat
+            label="Золото"
+            name="gold"
+            value={character.gold}
+            onChange={updateGold}
+          />
+          <CharacterChangingStat
+            label="Электрум"
+            name="electrum"
+            value={character.electrum}
+            onChange={updateElectrum}
+          />
+          <CharacterChangingStat
+            label="Серебро"
+            name="silver"
+            value={character.silver}
+            onChange={updateSilver}
+          />
+          <CharacterChangingStat
+            label="Медь"
+            name="copper"
+            value={character.copper}
+            onChange={updateCopper}
           />
           <CharacterChangingStat
             label="Опыт"
