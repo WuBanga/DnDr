@@ -53,6 +53,108 @@ const validationRules = {
       errorMessage: 'Поле "Спасброски" является обязательным',
     },
   ],
+  speed: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Скорость" является обязательным',
+    },
+  ],
+  strength: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Сила" является обязательным',
+    },
+  ],
+  widsom: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Мудрость" является обязательным',
+    },
+  ],
+  dexterity: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Ловкость" является обязательным',
+    },
+  ],
+  intelligence: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Интеллект" является обязательным',
+    },
+  ],
+  charisma: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Харизма" является обязательным',
+    },
+  ],
+  constitution: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Телосложение" является обязательным',
+    },
+  ],
+  hits: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Хиты" является обязательным',
+    },
+  ],
+  skillBonus: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Бонус мастерства" является обязательным',
+    },
+  ],
+  platinum: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Платина" является обязательным',
+    },
+  ],
+  gold: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Золото" является обязательным',
+    },
+  ],
+  electrum: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Электрум" является обязательным',
+    },
+  ],
+  silver: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Серебро" является обязательным',
+    },
+  ],
+  copper: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Медь" является обязательным',
+    },
+  ],
+  experience: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Опыт" является обязательным',
+    },
+  ],
+  level: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Уровень" является обязательным',
+    },
+  ],
+  extraHits: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Доп.хиты" является обязательным',
+    },
+  ],
 };
 
 const defaultCharacter = {
