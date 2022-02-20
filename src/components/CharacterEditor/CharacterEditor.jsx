@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 
 import { useFormError } from '../../hooks/useFormError';
+import { useInputOnChange } from '../../hooks/useInput';
 import { RequiredIcon } from '../../icons/RequiredIcon';
 import { Button } from '../Button/Button';
 import { FormCantripsList } from '../FormCantripsList/FormCantripsList';
@@ -52,6 +53,108 @@ const validationRules = {
       errorMessage: 'Поле "Спасброски" является обязательным',
     },
   ],
+  speed: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Скорость" является обязательным',
+    },
+  ],
+  strength: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Сила" является обязательным',
+    },
+  ],
+  widsom: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Мудрость" является обязательным',
+    },
+  ],
+  dexterity: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Ловкость" является обязательным',
+    },
+  ],
+  intelligence: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Интеллект" является обязательным',
+    },
+  ],
+  charisma: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Харизма" является обязательным',
+    },
+  ],
+  constitution: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Телосложение" является обязательным',
+    },
+  ],
+  hits: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Хиты" является обязательным',
+    },
+  ],
+  skillBonus: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Бонус мастерства" является обязательным',
+    },
+  ],
+  platinum: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Платина" является обязательным',
+    },
+  ],
+  gold: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Золото" является обязательным',
+    },
+  ],
+  electrum: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Электрум" является обязательным',
+    },
+  ],
+  silver: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Серебро" является обязательным',
+    },
+  ],
+  copper: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Медь" является обязательным',
+    },
+  ],
+  experience: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Опыт" является обязательным',
+    },
+  ],
+  level: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Уровень" является обязательным',
+    },
+  ],
+  extraHits: [
+    {
+      type: 'required',
+      errorMessage: 'Поле "Доп.хиты" является обязательным',
+    },
+  ],
 };
 
 const defaultCharacter = {
@@ -73,7 +176,11 @@ const defaultCharacter = {
   charisma: 0,
   hits: 8,
   skillBonus: 0,
-  money: 10,
+  platinum: 0,
+  gold: 10,
+  electrum: 0,
+  silver: 0,
+  copper: 0,
   experience: 0,
   level: 1,
   extraHits: 0,
@@ -104,6 +211,10 @@ export const CharacterEditor = (props) => {
     onSubmit(character);
   };
 
+  const formInputOnChange = (name, value) => {
+    setCharacter((prevState) => ({ ...prevState, [name]: value }));
+  };
+
   const getProps = (options) => {
     const { name, label, type = 'text', ...otherProps } = options;
     const props = {
@@ -116,21 +227,11 @@ export const CharacterEditor = (props) => {
       ) : (
         label
       ),
-      type: type,
-      value: character[name],
-      onChange: (e) => {
-        let value;
-        if ('target' in e) {
-          if (type === 'number') {
-            value = e.target.valueAsNumber;
-          } else {
-            value = e.target.value;
-          }
-        } else {
-          value = e;
-        }
-        setCharacter((prevState) => ({ ...prevState, [name]: value }));
-      },
+      value: character[name] === undefined ? '' : character[name],
+      onChange: useInputOnChange({
+        type: type,
+        onChange: (value) => formInputOnChange(name, value),
+      }),
       error: formErrors[name],
       ...otherProps,
     };
@@ -257,11 +358,42 @@ export const CharacterEditor = (props) => {
         <h1>Другое</h1>
         <FormInput
           {...getProps({
-            name: 'money',
-            label: 'Деньги',
+            name: 'platinum',
+            label: 'Платина',
             type: 'number',
             min: 0,
-            step: 0.01,
+          })}
+        />
+        <FormInput
+          {...getProps({
+            name: 'gold',
+            label: 'Золото',
+            type: 'number',
+            min: 0,
+          })}
+        />
+        <FormInput
+          {...getProps({
+            name: 'electrum',
+            label: 'Электрум',
+            type: 'number',
+            min: 0,
+          })}
+        />
+        <FormInput
+          {...getProps({
+            name: 'silver',
+            label: 'Серебро',
+            type: 'number',
+            min: 0,
+          })}
+        />
+        <FormInput
+          {...getProps({
+            name: 'copper',
+            label: 'Медь',
+            type: 'number',
+            min: 0,
           })}
         />
         <FormInput
