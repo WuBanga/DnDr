@@ -106,18 +106,29 @@ export const Game = () => {
     });
   };
 
-  const toggleUsedSpells = (spellId) => {
+  const toggleUsedSpells = (spellIndex) => {
     dispatch({
       type: characterActionTypes.TOGGLE_USED,
+      spellIndex: spellIndex,
+    });
+  };
+
+  const addPreparedSpell = (spellId) => {
+    dispatch({
+      type: characterActionTypes.ADD_PREPARED,
       spellId: spellId,
     });
   };
 
-  const togglePreparedSpells = (spellId) => {
+  const deletePreparedSpell = (spellIndex) => {
     dispatch({
-      type: characterActionTypes.TOGGLE_PREPARED,
-      spellId: spellId,
+      type: characterActionTypes.DELETE_PREPARED,
+      spellIndex: spellIndex,
     });
+  };
+
+  const returnSpellName = (id) => {
+    return character.spells.find((spell) => spell.id === id).name;
   };
 
   const closeModal = () => {
@@ -139,9 +150,7 @@ export const Game = () => {
               <ListItem
                 key={spell.id}
                 left={
-                  <Button onClick={() => togglePreparedSpells(spell.id)}>
-                    +
-                  </Button>
+                  <Button onClick={() => addPreparedSpell(spell.id)}>+</Button>
                 }
               >
                 {spell.name}
@@ -152,20 +161,16 @@ export const Game = () => {
         <div>
           <p>Подготовленные:</p>
           <List>
-            {character.spells
-              .filter((spell) => spell.prepared === true)
-              .map((spell) => (
-                <ListItem
-                  key={spell.id}
-                  left={
-                    <Button onClick={() => togglePreparedSpells(spell.id)}>
-                      -
-                    </Button>
-                  }
-                >
-                  {spell.name}
-                </ListItem>
-              ))}
+            {character.preparedSpells.map((spell, index) => (
+              <ListItem
+                key={index}
+                left={
+                  <Button onClick={() => deletePreparedSpell(index)}>-</Button>
+                }
+              >
+                {returnSpellName(spell.id)}
+              </ListItem>
+            ))}
           </List>
         </div>
       </Modal>
@@ -265,28 +270,37 @@ export const Game = () => {
       <div className="game__right-column">
         <section>
           <CharacterInfo title="Cпасброски" text={character.savingThrows} />
-          <CharacterInfo title="Навыки" text={character.skills} />
-          <CharacterInfo title="Снаряжение" text={character.equipment} />
+          {character.skills !== '' ? (
+            <CharacterInfo title="Навыки" text={character.skills} />
+          ) : null}
+          {character.equipment !== '' ? (
+            <CharacterInfo title="Снаряжение" text={character.equipment} />
+          ) : null}
         </section>
-        <section>
-          <div className="game__character-spells">
-            <h1>Заклинания</h1>
-            <Button onClick={openModal}>Подготовить</Button>
-            <Button onClick={resetUsedSpells}>Сброс</Button>
-          </div>
-          <GameSpellsList
-            spells={character.spells.filter((spell) => spell.prepared === true)}
-            onChange={toggleUsedSpells}
-          />
-        </section>
-        <section>
-          <h1>Заговоры</h1>
-          <List>
-            {character.cantrips.map((cantrip) => (
-              <ListItem key={cantrip}>{cantrip}</ListItem>
-            ))}
-          </List>
-        </section>
+        {character.spells.length !== 0 ? (
+          <section>
+            <div className="game__character-spells">
+              <h1>Заклинания</h1>
+              <Button onClick={openModal}>Подготовить</Button>
+              <Button onClick={resetUsedSpells}>Сброс</Button>
+            </div>
+            <GameSpellsList
+              spells={character.spells}
+              preparedSpells={character.preparedSpells}
+              onChange={toggleUsedSpells}
+            />
+          </section>
+        ) : null}
+        {character.cantrips.length !== 0 ? (
+          <section>
+            <h1>Заговоры</h1>
+            <List>
+              {character.cantrips.map((cantrip) => (
+                <ListItem key={cantrip}>{cantrip}</ListItem>
+              ))}
+            </List>
+          </section>
+        ) : null}
         <Link to={`/${character.id}/update`}>
           <Button>Редактировать</Button>
         </Link>

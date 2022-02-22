@@ -21,8 +21,6 @@ export const FormSpellsList = (props) => {
       spells.concat({
         id: generateId(),
         name: input,
-        prepared: false,
-        used: false,
       })
     );
     setInput('');
@@ -33,7 +31,11 @@ export const FormSpellsList = (props) => {
   };
 
   const updateSpells = (spells) => {
-    setCharacter((prevState) => ({ ...prevState, spells: spells }));
+    setCharacter((prevState) => ({
+      ...prevState,
+      spells: spells,
+      preparedSpells: [],
+    }));
   };
 
   return (

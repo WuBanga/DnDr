@@ -65,7 +65,7 @@ const validationRules = {
       errorMessage: 'Поле "Сила" является обязательным',
     },
   ],
-  widsom: [
+  wisdom: [
     {
       type: 'required',
       errorMessage: 'Поле "Мудрость" является обязательным',
@@ -168,6 +168,7 @@ const defaultCharacter = {
   skills: '',
   equipment: '',
   spells: [],
+  preparedSpells: [],
   cantrips: [],
   strength: 0,
   wisdom: 0,
