@@ -21,8 +21,6 @@ export const FormSpellsList = (props) => {
       spells.concat({
         id: generateId(),
         name: input,
-        prepared: false,
-        used: false,
       })
     );
     setInput('');

@@ -2,7 +2,8 @@ export const characterActionTypes = {
   SET: 'set',
   TOGGLE_USED: 'toggleUsed',
   RESET_USED: 'resetUsed',
-  TOGGLE_PREPARED: 'togglePrepared',
+  ADD_PREPARED: 'addPrepared',
+  DELETE_PREPARED: 'deletePrepared',
   UPDATE_HITS: 'updateHits',
   UPDATE_EXTRA_HITS: 'updateExtraHits',
   UPDATE_PLATINUM: 'updatePlatinum',
@@ -19,10 +20,12 @@ export const characterReducer = (state, action) => {
   switch (action.type) {
     case characterActionTypes.SET:
       return action.character;
-    case characterActionTypes.TOGGLE_PREPARED:
-      return togglePrepared(state, action.spellId);
+    case characterActionTypes.ADD_PREPARED:
+      return addPrepared(state, action.spellId);
+    case characterActionTypes.DELETE_PREPARED:
+      return deletePrepared(state, action.spellIndex);
     case characterActionTypes.TOGGLE_USED:
-      return toggleUsed(state, action.spellId);
+      return toggleUsed(state, action.spellIndex);
     case characterActionTypes.RESET_USED:
       return resetUsed(state);
     case characterActionTypes.UPDATE_HITS:
@@ -120,25 +123,29 @@ const updateHits = (character, hits) => {
   };
 };
 
-const togglePrepared = (character, spellId) => {
+const addPrepared = (character, spellId) => {
   return {
     ...character,
-    spells: character.spells.map((spell) => {
-      if (spell.id === spellId) {
-        return {
-          ...spell,
-          prepared: !spell.prepared,
-        };
-      }
-      return spell;
+    preparedSpells: character.preparedSpells.concat({
+      id: spellId,
+      used: false,
     }),
+  };
+};
+
+const deletePrepared = (character, spellIndex) => {
+  return {
+    ...character,
+    preparedSpells: character.preparedSpells
+      .slice(0, spellIndex)
+      .concat(character.preparedSpells.slice(spellIndex + 1)),
   };
 };
 
 const resetUsed = (character) => {
   return {
     ...character,
-    spells: character.spells.map((spell) => {
+    preparedSpells: character.preparedSpells.map((spell) => {
       return {
         ...spell,
         used: false,
@@ -147,11 +154,11 @@ const resetUsed = (character) => {
   };
 };
 
-const toggleUsed = (character, spellId) => {
+const toggleUsed = (character, spellIndex) => {
   return {
     ...character,
-    spells: character.spells.map((spell) => {
-      if (spell.id === spellId) {
+    preparedSpells: character.preparedSpells.map((spell, index) => {
+      if (index === spellIndex) {
         return {
           ...spell,
           used: !spell.used,

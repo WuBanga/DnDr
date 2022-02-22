@@ -3,7 +3,7 @@ import { List } from '../List/List';
 import { ListItem } from '../List/ListItem';
 
 export const GameSpellsList = (props) => {
-  const { spells = [], onChange } = props;
+  const { spells = [], onChange, returnSpellName } = props;
 
   const toggleChecked = (id) => {
     onChange(id);
@@ -11,22 +11,22 @@ export const GameSpellsList = (props) => {
 
   return (
     <List>
-      {spells.map((spell) => (
+      {spells.map((spell, index) => (
         <ListItem
-          key={spell.id}
+          key={index}
           left={
             <CheckBox
               isChecked={spell.used}
-              onCheck={() => toggleChecked(spell.id)}
+              onCheck={() => toggleChecked(index)}
             />
           }
         >
           {spell.used ? (
             <p>
-              <strike>{spell.name}</strike>
+              <strike>{returnSpellName(spell.id)}</strike>
             </p>
           ) : (
-            <p>{spell.name}</p>
+            <p>{returnSpellName(spell.id)}</p>
           )}
         </ListItem>
       ))}
