@@ -7,13 +7,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--text-color);
 }
 
-.icon-button__icon {
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--text-color);
+.icon-button--small {
+  width: 42px;
+  height: 42px;
+}
+.icon-button--medium {
+  width: 70px;
+  height: 70px;
+}
+
+.icon-button--large {
+  width: 92px;
+  height: 92px;
+}
+
+.icon-button:hover {
+  border-color: var(--focus-color);
+  color: var(--focus-color);
 }

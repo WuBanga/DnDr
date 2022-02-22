@@ -1,0 +1,6 @@
+.home-page-button {
+  position: sticky;
+  top: 10px;
+  background-color: var(--primary-color);
+  border-width: 2px;
+}

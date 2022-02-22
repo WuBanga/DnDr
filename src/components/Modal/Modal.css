@@ -16,6 +16,23 @@
 
 .modal {
   background-color: var(--primary-color);
-  padding: 1rem;
+  padding: 1rem 2rem;
+  border-radius: var(--rounded-base);
+  height: 900px;
+  width: 500px;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: var(--rounded-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-color);
   border-radius: var(--rounded-base);
 }

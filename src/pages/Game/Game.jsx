@@ -7,6 +7,7 @@ import { CharacterChangingStat } from '../../components/CharacterChangingStat/Ch
 import { CharacterInfo } from '../../components/CharacterInfo/CharacterInfo';
 import { CharacterStat } from '../../components/CharacterStat/CharacterStat';
 import { GameSpellsList } from '../../components/GameSpellsList/GameSpellsList';
+import { HomePageButton } from '../../components/HomePageButton/HomePageButton';
 import { Label } from '../../components/Label/Label';
 import { List } from '../../components/List/List';
 import { ListItem } from '../../components/List/ListItem';
@@ -14,6 +15,7 @@ import { Modal } from '../../components/Modal/Modal';
 import { TextArea } from '../../components/TextArea/TextArea';
 import { characterActionTypes } from '../../hooks/characterReducer';
 import { useCharacter } from '../../hooks/charactersContext';
+import { NotFound } from '../NotFound/NotFound';
 import './Game.css';
 
 export const Game = () => {
@@ -25,10 +27,14 @@ export const Game = () => {
     return <div>Loading...</div>;
   }
 
-  const updateComment = (comment) => {
+  if (character === undefined) {
+    return <NotFound />;
+  }
+
+  const updateComment = (e) => {
     dispatch({
       type: characterActionTypes.UPDATE_COMMENT,
-      comment: comment,
+      comment: e.target.value,
     });
   };
 
@@ -46,10 +52,38 @@ export const Game = () => {
     });
   };
 
-  const updateMoney = (money) => {
+  const updatePlatinum = (platinum) => {
     dispatch({
-      type: characterActionTypes.UPDATE_MONEY,
-      money: money,
+      type: characterActionTypes.UPDATE_PLATINUM,
+      platinum: platinum,
+    });
+  };
+
+  const updateGold = (gold) => {
+    dispatch({
+      type: characterActionTypes.UPDATE_GOLD,
+      gold: gold,
+    });
+  };
+
+  const updateElectrum = (electrum) => {
+    dispatch({
+      type: characterActionTypes.UPDATE_ELECTRUM,
+      electrum: electrum,
+    });
+  };
+
+  const updateSilver = (silver) => {
+    dispatch({
+      type: characterActionTypes.UPDATE_SILVER,
+      silver: silver,
+    });
+  };
+
+  const updateCopper = (copper) => {
+    dispatch({
+      type: characterActionTypes.UPDATE_COPPER,
+      copper: copper,
     });
   };
 
@@ -72,18 +106,29 @@ export const Game = () => {
     });
   };
 
-  const toggleUsedSpells = (spellId) => {
+  const toggleUsedSpells = (spellIndex) => {
     dispatch({
       type: characterActionTypes.TOGGLE_USED,
+      spellIndex: spellIndex,
+    });
+  };
+
+  const addPreparedSpell = (spellId) => {
+    dispatch({
+      type: characterActionTypes.ADD_PREPARED,
       spellId: spellId,
     });
   };
 
-  const togglePreparedSpells = (spellId) => {
+  const deletePreparedSpell = (spellIndex) => {
     dispatch({
-      type: characterActionTypes.TOGGLE_PREPARED,
-      spellId: spellId,
+      type: characterActionTypes.DELETE_PREPARED,
+      spellIndex: spellIndex,
     });
+  };
+
+  const returnSpellName = (id) => {
+    return character.spells.find((spell) => spell.id === id).name;
   };
 
   const closeModal = () => {
@@ -96,6 +141,7 @@ export const Game = () => {
 
   return (
     <div className="game">
+      <HomePageButton />
       <Modal title="Заклинания" isOpen={isModalOpen} onClose={closeModal}>
         <div>
           <p>Все:</p>
@@ -104,9 +150,7 @@ export const Game = () => {
               <ListItem
                 key={spell.id}
                 left={
-                  <Button onClick={() => togglePreparedSpells(spell.id)}>
-                    +
-                  </Button>
+                  <Button onClick={() => addPreparedSpell(spell.id)}>+</Button>
                 }
               >
                 {spell.name}
@@ -117,24 +161,19 @@ export const Game = () => {
         <div>
           <p>Подготовленные:</p>
           <List>
-            {character.spells
-              .filter((spell) => spell.prepared === true)
-              .map((spell) => (
-                <ListItem
-                  key={spell.id}
-                  left={
-                    <Button onClick={() => togglePreparedSpells(spell.id)}>
-                      -
-                    </Button>
-                  }
-                >
-                  {spell.name}
-                </ListItem>
-              ))}
+            {character.preparedSpells.map((spell, index) => (
+              <ListItem
+                key={index}
+                left={
+                  <Button onClick={() => deletePreparedSpell(index)}>-</Button>
+                }
+              >
+                {returnSpellName(spell.id)}
+              </ListItem>
+            ))}
           </List>
         </div>
       </Modal>
-
       <div className="game__left-column">
         <section className="game__character-info game__group">
           <div className="game__left-column">
@@ -177,11 +216,34 @@ export const Game = () => {
         </section>
         <section className="game__character-other game__group">
           <CharacterChangingStat
-            label="Деньги"
-            name="money"
-            step={0.01}
-            value={character.money}
-            onChange={updateMoney}
+            label="Платина"
+            name="platinum"
+            value={character.platinum}
+            onChange={updatePlatinum}
+          />
+          <CharacterChangingStat
+            label="Золото"
+            name="gold"
+            value={character.gold}
+            onChange={updateGold}
+          />
+          <CharacterChangingStat
+            label="Электрум"
+            name="electrum"
+            value={character.electrum}
+            onChange={updateElectrum}
+          />
+          <CharacterChangingStat
+            label="Серебро"
+            name="silver"
+            value={character.silver}
+            onChange={updateSilver}
+          />
+          <CharacterChangingStat
+            label="Медь"
+            name="copper"
+            value={character.copper}
+            onChange={updateCopper}
           />
           <CharacterChangingStat
             label="Опыт"
@@ -208,28 +270,37 @@ export const Game = () => {
       <div className="game__right-column">
         <section>
           <CharacterInfo title="Cпасброски" text={character.savingThrows} />
-          <CharacterInfo title="Навыки" text={character.skills} />
-          <CharacterInfo title="Снаряжение" text={character.equipment} />
+          {character.skills !== '' ? (
+            <CharacterInfo title="Навыки" text={character.skills} />
+          ) : null}
+          {character.equipment !== '' ? (
+            <CharacterInfo title="Снаряжение" text={character.equipment} />
+          ) : null}
         </section>
-        <section>
-          <div className="game__character-spells">
-            <h1>Заклинания</h1>
-            <Button onClick={openModal}>Подготовить</Button>
-            <Button onClick={resetUsedSpells}>Сброс</Button>
-          </div>
-          <GameSpellsList
-            spells={character.spells.filter((spell) => spell.prepared === true)}
-            onChange={toggleUsedSpells}
-          />
-        </section>
-        <section>
-          <h1>Заговоры</h1>
-          <List>
-            {character.cantrips.map((cantrip) => (
-              <ListItem key={cantrip}>{cantrip}</ListItem>
-            ))}
-          </List>
-        </section>
+        {character.spells.length !== 0 ? (
+          <section>
+            <div className="game__character-spells">
+              <h1>Заклинания</h1>
+              <Button onClick={openModal}>Подготовить</Button>
+              <Button onClick={resetUsedSpells}>Сброс</Button>
+            </div>
+            <GameSpellsList
+              spells={character.spells}
+              preparedSpells={character.preparedSpells}
+              onChange={toggleUsedSpells}
+            />
+          </section>
+        ) : null}
+        {character.cantrips.length !== 0 ? (
+          <section>
+            <h1>Заговоры</h1>
+            <List>
+              {character.cantrips.map((cantrip) => (
+                <ListItem key={cantrip}>{cantrip}</ListItem>
+              ))}
+            </List>
+          </section>
+        ) : null}
         <Link to={`/${character.id}/update`}>
           <Button>Редактировать</Button>
         </Link>

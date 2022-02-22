@@ -5,6 +5,7 @@ export const PlusIcon = () => {
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
+      style={{ width: '100%' }}
     >
       <path
         strokeLinecap="round"
