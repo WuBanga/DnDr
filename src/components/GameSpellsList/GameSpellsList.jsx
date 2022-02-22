@@ -3,7 +3,12 @@ import { List } from '../List/List';
 import { ListItem } from '../List/ListItem';
 
 export const GameSpellsList = (props) => {
-  const { spells = [], onChange, returnSpellName } = props;
+  const { spells = [], preparedSpells = [], onChange } = props;
+
+  const names = spells.reduce((acc, cur) => {
+    acc[cur.id] = cur.name;
+    return acc;
+  }, {});
 
   const toggleChecked = (id) => {
     onChange(id);
@@ -11,7 +16,7 @@ export const GameSpellsList = (props) => {
 
   return (
     <List>
-      {spells.map((spell, index) => (
+      {preparedSpells.map((spell, index) => (
         <ListItem
           key={index}
           left={
@@ -23,10 +28,10 @@ export const GameSpellsList = (props) => {
         >
           {spell.used ? (
             <p>
-              <strike>{returnSpellName(spell.id)}</strike>
+              <strike>{names[spell.id]}</strike>
             </p>
           ) : (
-            <p>{returnSpellName(spell.id)}</p>
+            <p>{names[spell.id]}</p>
           )}
         </ListItem>
       ))}

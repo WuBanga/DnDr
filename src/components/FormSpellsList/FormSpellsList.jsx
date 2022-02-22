@@ -31,7 +31,11 @@ export const FormSpellsList = (props) => {
   };
 
   const updateSpells = (spells) => {
-    setCharacter((prevState) => ({ ...prevState, spells: spells }));
+    setCharacter((prevState) => ({
+      ...prevState,
+      spells: spells,
+      preparedSpells: [],
+    }));
   };
 
   return (

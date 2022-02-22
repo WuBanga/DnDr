@@ -285,9 +285,9 @@ export const Game = () => {
               <Button onClick={resetUsedSpells}>Сброс</Button>
             </div>
             <GameSpellsList
-              spells={character.preparedSpells}
+              spells={character.spells}
+              preparedSpells={character.preparedSpells}
               onChange={toggleUsedSpells}
-              returnSpellName={returnSpellName}
             />
           </section>
         ) : null}
