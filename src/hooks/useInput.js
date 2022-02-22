@@ -1,4 +1,4 @@
-const textRegExp = /^[\wа-яА-Я\s]*$/;
+const textRegExp = /^[\wа-яА-Я,\s]*$/;
 const numberRegExp = /^\d*$/;
 
 export const useInputOnChange = (props) => {
