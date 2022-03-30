@@ -6,12 +6,12 @@ import './HomePageButton.css';
 
 export const HomePageButton = () => {
   return (
-    <IconButton
-      className="home-page-button"
-      size="medium"
-      icon={<HomeIcon />}
-      as={Link}
-      to="/"
-    />
+    <Link to="/">
+      <IconButton
+        className="home-page-button"
+        size="medium"
+        icon={<HomeIcon />}
+      />
+    </Link>
   );
 };
