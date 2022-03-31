@@ -1,9 +1,13 @@
+import { ComponentPropsWithRef, forwardRef } from 'react';
+
 import './Button.css';
 
-export const Button = (props) => {
-  const { type = 'button', className, as, color, ...otherProps } = props;
+export const Button = forwardRef<
+  HTMLButtonElement,
+  ComponentPropsWithRef<'button'>
+>((props, ref) => {
+  const { type = 'button', className, color, ...otherProps } = props;
   const classes = ['button'];
-  let Component = 'button';
 
   switch (color) {
     case 'red':
@@ -18,18 +22,15 @@ export const Button = (props) => {
       break;
   }
 
-  if (as !== undefined) {
-    Component = as;
-  }
-
   if (className) {
     classes.push(className);
   }
   return (
-    <Component
+    <button
+      ref={ref}
       className={classes.join(' ')}
       type={type}
       {...otherProps}
-    ></Component>
+    ></button>
   );
-};
+});

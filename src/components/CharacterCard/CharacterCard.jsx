@@ -37,20 +37,12 @@ export const CharacterCard = (props) => {
         <p className="character-card__text">{character.class}</p>
       </div>
       <div className="character-card__buttons">
-        <Button
-          className="character-card__button"
-          as={Link}
-          to={`/${character.id}/update`}
-        >
-          Редактировать
-        </Button>
-        <Button
-          className="character-card__button"
-          as={Link}
-          to={`/${character.id}/game`}
-        >
-          Играть
-        </Button>
+        <Link to={`/${character.id}/update`}>
+          <Button className="character-card__button">Редактировать</Button>
+        </Link>
+        <Link to={`/${character.id}/game`}>
+          <Button className="character-card__button">Играть</Button>
+        </Link>
         <Button
           className="character-card__button"
           color="red"
